@@ -25,12 +25,12 @@ private val retrofit = Retrofit.Builder()
 interface UsgsApiService {
 
     @GET("query")
-    fun getLastTenEarthquakes(@Query("format") format: String,
-                              @Query("latitude") latitude: Double,
-                              @Query("longitude") longitude: Double,
-                              @Query("maxradiuskm") maxradiuskm: Double,
-                              @Query("orderby") orderby: String,
-                              @Query("limit") limit: Int
+    fun getEarthquakes(@Query("format") format: String,
+                       @Query("latitude") latitude: Double,
+                       @Query("longitude") longitude: Double,
+                       @Query("maxradiuskm") maxradiuskm: Double,
+                       @Query("orderby") orderby: String,
+                       @Query("limit") limit: Int
     ) : Deferred<Model.Result>
 }
 

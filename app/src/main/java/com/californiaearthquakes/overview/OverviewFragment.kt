@@ -21,6 +21,10 @@ class OverviewFragment: Fragment() {
 
         binding.setLifecycleOwner(this)
 
+        binding.viewModel = viewModel
+
+        binding.earthquakesList.adapter = EarthquakeAdapter()
+
         return binding.root
     }
 }

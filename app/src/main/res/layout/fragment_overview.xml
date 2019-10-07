@@ -3,9 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.californiaearthquakes.overview.OverviewViewModule" />
+    </data>
+    
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context="com.example.android.marsrealestate.MainActivity">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/earthquakes_list"
@@ -16,6 +23,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:listData="@{viewModel.earthquakes}"
             tools:itemCount="10"
             tools:listItem="@layout/list_item_view"/>
     </androidx.constraintlayout.widget.ConstraintLayout>

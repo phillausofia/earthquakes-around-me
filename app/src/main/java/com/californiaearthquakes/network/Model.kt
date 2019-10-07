@@ -1,5 +1,8 @@
 package com.californiaearthquakes.network
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 
 object Model {
 
