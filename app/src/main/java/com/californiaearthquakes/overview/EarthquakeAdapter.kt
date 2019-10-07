@@ -9,11 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.californiaearthquakes.databinding.ListItemViewBinding
 import com.californiaearthquakes.network.Model
 import com.californiaearthquakes.network.Model.Earthquake
+import kotlinx.android.synthetic.main.fragment_overview.view.*
 
 class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EarthquakeViewHolder {
 
-        return EarthquakeViewHolder(ListItemViewBinding.inflate(LayoutInflater.from(parent.context)))
+        return EarthquakeViewHolder(ListItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
     }
 
