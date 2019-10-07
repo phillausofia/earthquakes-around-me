@@ -4,7 +4,7 @@ package com.californiaearthquakes.network
 object Model {
 
     data class Result(
-        val features: Array<Feature>
+        val features: List<Feature>
         )
 
     data class Feature(

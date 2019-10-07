@@ -34,12 +34,6 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation "com.squareup.retrofit2:retrofit:2.3.0"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:2.3.0"
-    implementation "com.squareup.retrofit2:converter-gson:2.3.0"
-
-    implementation "io.reactivex.rxjava2:rxandroid:2.0.1"
-
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version_kotlin_coroutines"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version_kotlin_coroutines"
@@ -54,4 +48,7 @@ dependencies {
     // Retrofit with Moshi Converter
     implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+
+    // RecyclerView
+    implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 }
