@@ -3,4 +3,8 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="color_not_even_an_earthquake">#007000</color>
+    <color name="color_low_earthquake">#238823</color>
+    <color name="color_mid_earthquake">#FFBF00</color>
+    <color name="color_high_earthquake">#D2222D</color>
 </resources>
