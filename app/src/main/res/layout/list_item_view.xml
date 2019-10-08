@@ -38,7 +38,7 @@
             app:layout_constraintEnd_toStartOf="@+id/mag"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/place"
-            app:time="@{String.valueOf(earthquake.time)}"
+            app:time="@{earthquake.time}"
             tools:text="Monday, 17th of July, 2019" />
 
 
@@ -51,7 +51,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:time="@{String.valueOf(earthquake.mag)}"
+            app:mag="@{earthquake.mag}"
             tools:text="4.3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

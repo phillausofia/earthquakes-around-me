@@ -5,6 +5,8 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.californiaearthquakes.network.Model.Earthquake
 import com.californiaearthquakes.overview.EarthquakeAdapter
+import java.text.SimpleDateFormat
+import java.util.*
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Earthquake>?) {
@@ -13,16 +15,17 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Earthquake>?) {
 }
 
 @BindingAdapter("place")
-fun bindPlace(txtView: TextView, place: String) {
-    txtView.text = place
+fun TextView.bindPlace(place: String) {
+    text = place
 }
 
 @BindingAdapter("time")
-fun bindTime(txtView: TextView, time: String) {
-    txtView.text = time
+fun TextView.bindTime(time: Long) {
+    text = SimpleDateFormat("yyyy-MM-dd h:mm:ss a", Locale.US)
+        .format(Date(time))
 }
 
 @BindingAdapter("mag")
-fun bindMag(txtView: TextView, mag: String) {
-    txtView.text = mag
+fun TextView.bindMag(mag: Double) {
+    text = mag.toString()
 }
