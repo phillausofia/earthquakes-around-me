@@ -1,8 +1,11 @@
 package com.californiaearthquakes
 
+import android.graphics.Color
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.californiaearthquakes.network.EarthquakeIntensity
 import com.californiaearthquakes.network.Model.Earthquake
 import com.californiaearthquakes.overview.EarthquakeAdapter
 import java.text.SimpleDateFormat
@@ -28,4 +31,16 @@ fun TextView.bindTime(time: Long) {
 @BindingAdapter("mag")
 fun TextView.bindMag(mag: Double) {
     text = mag.toString()
+}
+
+@BindingAdapter("setBackground")
+fun ConstraintLayout.setBackgroundDependingOnIntensity(intensity: EarthquakeIntensity) {
+    intensity.let {
+        setBackgroundColor(when (it) {
+            EarthquakeIntensity.NOT_EVEN_AN_EARTHQUAKE -> resources.getColor(R.color.color_not_even_an_earthquake)
+            EarthquakeIntensity.LOW -> resources.getColor(R.color.color_low_earthquake)
+            EarthquakeIntensity.MED -> resources.getColor(R.color.color_med_earthquake)
+            else -> resources.getColor(R.color.color_high_earthquake)
+        })
+    }
 }
