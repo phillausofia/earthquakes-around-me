@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import com.californiaearthquakes.databinding.FragmentOverviewBinding
 
 class OverviewFragment: Fragment() {
@@ -25,6 +26,9 @@ class OverviewFragment: Fragment() {
 
         binding.earthquakesList.adapter = EarthquakeAdapter()
 
+        //Add dividers to list
+        binding.earthquakesList.addItemDecoration(DividerItemDecoration(this.context,
+            DividerItemDecoration.VERTICAL))
         return binding.root
     }
 }

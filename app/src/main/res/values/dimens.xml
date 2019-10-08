@@ -6,4 +6,5 @@
     <dimen name="place_text_size">18sp</dimen>
     <dimen name="time_text_size">15sp</dimen>
     <dimen name="mag_text_size">20sp</dimen>
+    <dimen name="layout_half_padding">8dp</dimen>
 </resources>

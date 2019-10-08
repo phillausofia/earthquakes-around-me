@@ -14,8 +14,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/layout_padding"
-        android:paddingTop="@dimen/layout_padding"
+        android:paddingTop="@dimen/layout_half_padding"
         android:paddingEnd="@dimen/layout_padding"
+        android:paddingBottom="@dimen/layout_half_padding"
         app:setBackground="@{earthquake.intensity}">
 
 
