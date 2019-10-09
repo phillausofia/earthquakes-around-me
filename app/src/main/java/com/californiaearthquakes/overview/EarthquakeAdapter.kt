@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.fragment_overview.view.*
 class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EarthquakeViewHolder {
 
-        return EarthquakeViewHolder(ListItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false))
-
+        return EarthquakeViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: EarthquakeViewHolder, position: Int) {
@@ -28,6 +27,15 @@ class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeVi
         fun bin(earthquake: Earthquake) {
             binding.earthquake = earthquake
             binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup) : EarthquakeViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItemViewBinding.inflate(layoutInflater, parent, false)
+
+                return EarthquakeViewHolder(binding)
+            }
         }
     }
 

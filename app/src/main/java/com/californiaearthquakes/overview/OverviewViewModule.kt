@@ -35,6 +35,7 @@ class OverviewViewModule : ViewModel() {
             try {
                 val result = getEarthquakesDeffered.await()
                 _earthquakes.value = result.features.map { it.properties }
+
             } catch (e: Exception) {
                 _earthquakes.value = ArrayList()
             }
