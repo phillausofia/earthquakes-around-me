@@ -10,20 +10,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
+
+
 class OverviewViewModule : ViewModel() {
 
     private val _earthquakes = MutableLiveData<List<Earthquake>>()
     val earthquakes : LiveData<List<Earthquake>>
         get() = _earthquakes
 
+    private val _isLoadingMoreResults = MutableLiveData<Boolean>(false)
+    val isLoadingMoreResuls : LiveData<Boolean>
+        get() = _isLoadingMoreResults
+
+    var resultsLimit = 10
+
     private val viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
-        getLatestTenEarthquakes()
+        getLatestEarthquakes()
     }
-    private fun getLatestTenEarthquakes() {
+    private fun getLatestEarthquakes() {
         coroutineScope.launch {
             val getEarthquakesDeffered =
                 UsgsApi.usgsApiService.getEarthquakes("geojson",
@@ -31,10 +39,11 @@ class OverviewViewModule : ViewModel() {
                     -119.417931,
                     500.0,
                     "time",
-                    10)
+                    resultsLimit)
             try {
                 val result = getEarthquakesDeffered.await()
                 _earthquakes.value = result.features.map { it.properties }
+                _isLoadingMoreResults.value = false
 
             } catch (e: Exception) {
                 _earthquakes.value = ArrayList()
@@ -45,5 +54,16 @@ class OverviewViewModule : ViewModel() {
     override fun onCleared() {
         super.onCleared()
         viewModelJob.cancel()
+    }
+
+    private fun increaseResultsLimitByTen() {
+        resultsLimit += 10
+    }
+
+    fun getMoreResults() {
+        _isLoadingMoreResults.value = true
+        increaseResultsLimitByTen()
+        getLatestEarthquakes()
+
     }
 }
