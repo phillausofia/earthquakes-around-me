@@ -3,8 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
-    <color name="color_not_even_an_earthquake">#33007000</color> //30% opacity
-    <color name="color_low_earthquake">#33238823</color> //30% opacity
-    <color name="color_med_earthquake">#33FFBF00</color> //30% opacity
-    <color name="color_high_earthquake">#33D2222D</color> //30% opacity
+
+    <!--
+    The following colors will have a 20% opacity
+    -->
+
+    <color name="color_not_even_an_earthquake">#33007000</color>
+    <color name="color_low_earthquake">#33238823</color>
+    <color name="color_med_earthquake">#33FFBF00</color>
+    <color name="color_high_earthquake">#33D2222D</color>
 </resources>

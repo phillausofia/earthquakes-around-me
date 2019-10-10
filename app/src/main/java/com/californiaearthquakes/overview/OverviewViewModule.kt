@@ -11,7 +11,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 
-
 class OverviewViewModule : ViewModel() {
 
     private val _earthquakes = MutableLiveData<List<Earthquake>>()
@@ -22,7 +21,9 @@ class OverviewViewModule : ViewModel() {
     val isLoadingMoreResuls : LiveData<Boolean>
         get() = _isLoadingMoreResults
 
-    var resultsLimit = 10
+    private var resultsLimit = 10
+
+    private var minMagnitude = Util.MIN_MAGNITUDE
 
     private val viewModelJob = Job()
 
@@ -34,11 +35,12 @@ class OverviewViewModule : ViewModel() {
     private fun getLatestEarthquakes() {
         coroutineScope.launch {
             val getEarthquakesDeffered =
-                UsgsApi.usgsApiService.getEarthquakes("geojson",
-                    36.778259,
-                    -119.417931,
-                    500.0,
-                    "time",
+                UsgsApi.usgsApiService.getEarthquakes(Util.RESULTS_FORMAT,
+                    Util.LATITUDE,
+                    Util.LONGITUDE,
+                    Util.MAX_RADIUS_KM,
+                    minMagnitude,
+                    Util.ORDER_BY,
                     resultsLimit)
             try {
                 val result = getEarthquakesDeffered.await()

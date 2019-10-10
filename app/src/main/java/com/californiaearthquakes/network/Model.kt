@@ -21,7 +21,7 @@ object Model {
         val time: Long
     ) {
         val intensity = when (mag) {
-            in 0.0..1.99 -> EarthquakeIntensity.NOT_EVEN_AN_EARTHQUAKE
+            in -10.0..1.99 -> EarthquakeIntensity.NOT_EVEN_AN_EARTHQUAKE
             in 2.0..3.99 -> EarthquakeIntensity.LOW
             in 4.0..5.99 -> EarthquakeIntensity.MED
             else -> EarthquakeIntensity.HIGH
