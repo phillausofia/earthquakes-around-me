@@ -44,7 +44,16 @@ class OverviewFragment: Fragment() {
         viewModel.earthquakes.observe(this, Observer {
             list ->
             if (list.isNotEmpty()) {
-                binding.progressBar.visibility = View.GONE
+                binding.mainProgressBar.visibility = View.GONE
+            }
+        })
+
+        viewModel.isLoadingMoreResuls.observe(this, Observer {isLoading ->
+            if (isLoading) {
+                binding.scrollProgressBar.visibility = View.VISIBLE
+            }
+            else {
+                binding.scrollProgressBar.visibility = View.GONE
             }
         })
 
@@ -63,7 +72,6 @@ class OverviewFragment: Fragment() {
                     if (!(viewModel.isLoadingMoreResuls.value!!) && totalItemCount <= lastVisibleItemPosition + 1 + scrollThreshold) {
                         viewModel.getMoreResults()
                     }
-                    Toast.makeText(context, "${totalItemCount} ${lastVisibleItemPosition} ${viewModel.resultsLimit}", Toast.LENGTH_SHORT).show()
 
                 }
             }
