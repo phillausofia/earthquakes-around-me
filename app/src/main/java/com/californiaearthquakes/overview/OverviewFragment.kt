@@ -1,14 +1,14 @@
 package com.californiaearthquakes.overview
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,7 +30,7 @@ class OverviewFragment: Fragment() {
 
         val binding: FragmentOverviewBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview, container, false)
 
-        binding.setLifecycleOwner(this)
+        binding.lifecycleOwner = this
 
         binding.viewModel = viewModel
 
@@ -57,9 +57,6 @@ class OverviewFragment: Fragment() {
             }
         })
 
-
-        val context = this.context
-
         binding.earthquakesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
@@ -76,7 +73,20 @@ class OverviewFragment: Fragment() {
                 }
             }
         })
+        setHasOptionsMenu(true)
 
         return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_overflow, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController())
+                || super.onOptionsItemSelected(item)
+    }
+
+
 }

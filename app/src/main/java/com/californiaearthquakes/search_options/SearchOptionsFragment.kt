@@ -1,14 +1,17 @@
 package com.californiaearthquakes.search_options
 
 import android.os.Bundle
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.californiaearthquakes.R
 import com.californiaearthquakes.databinding.FragmentSearchOptionsBinding
+import androidx.navigation.Navigation
 
 
 class SearchOptionsFragment: Fragment() {
@@ -25,8 +28,13 @@ class SearchOptionsFragment: Fragment() {
             wrapSelectorWheel = true
         }
 
-        binding.buttonSearch.setOnClickListener(View.OnClickListener { Toast.makeText(this.context,
-            "${binding.numberPickerMinimumMagnitude.value}", Toast.LENGTH_SHORT).show() })
+        binding.buttonSearch.setOnClickListener{view ->
+            view.findNavController()
+                .navigate(SearchOptionsFragmentDirections
+                    .actionSearchOptionsFragmentToOverviewFragment(binding
+                        .numberPickerMinimumMagnitude.value))
+        }
+
 
         return binding.root
     }

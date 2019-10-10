@@ -4,4 +4,5 @@
     <string name="about_options_fragment">Here you can modify different parameters of the displayed earthquakes. Like minimum magnitude of maximum magnitude of the earthquakes.</string>
     <string name="minimum_magnitude">Minimum magnitude</string>
     <string name="search">Search</string>
+    <string name="search_options">Search Options</string>
 </resources>

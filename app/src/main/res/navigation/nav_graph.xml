@@ -9,10 +9,20 @@
         android:id="@+id/overviewFragment"
         android:name="com.californiaearthquakes.overview.OverviewFragment"
         android:label="OverviewFragment"
-        tools:layout="@layout/fragment_overview" />
+        tools:layout="@layout/fragment_overview" >
+        <argument
+            android:name="minMagnitude"
+            app:argType="integer" />
+    </fragment>
+
     <fragment
         android:id="@+id/searchOptionsFragment"
         android:name="com.californiaearthquakes.search_options.SearchOptionsFragment"
         android:label="SearchOptionsFragment"
-        tools:layout="@layout/fragment_search_options" />
+        tools:layout="@layout/fragment_search_options" >
+        <action
+            android:id="@+id/action_searchOptionsFragment_to_overviewFragment"
+            app:destination="@id/overviewFragment"
+            app:popUpTo="@+id/overviewFragment" />
+    </fragment>
 </navigation>
