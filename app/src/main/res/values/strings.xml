@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">California Earthquakes</string>
     <string name="load_more">Load more</string>
+    <string name="about_options_fragment">Here you can modify different parameters of the displayed earthquakes. Like minimum magnitude of maximum magnitude of the earthquakes.</string>
+    <string name="minimum_magnitude">Minimum magnitude</string>
+    <string name="search">Search</string>
 </resources>

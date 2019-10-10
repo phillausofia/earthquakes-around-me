@@ -8,4 +8,5 @@
     <dimen name="mag_text_size">20sp</dimen>
     <dimen name="layout_half_padding">8dp</dimen>
     <dimen name="recyclerview_padding_bottom">50dp</dimen>
+    <dimen name="options_fragment_category_text_size">20sp</dimen>
 </resources>

@@ -32,6 +32,8 @@ interface UsgsApiService {
                        @Query("orderby") orderby: String,
                        @Query("limit") limit: Int
     ) : Deferred<Model.Result>
+
+
 }
 
 object UsgsApi {

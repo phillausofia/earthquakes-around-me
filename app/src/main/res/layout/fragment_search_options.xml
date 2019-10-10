@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/options_fragment_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/about_options_fragment"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:text="@string/about_options_fragment"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/min_mag_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:text="@string/minimum_magnitude"
+            android:textSize="@dimen/options_fragment_category_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/about_options_fragment" />
+
+        <NumberPicker
+            android:id="@+id/number_picker_minimum_magnitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/min_mag_text_view" />
+
+        <Button
+            android:id="@+id/button_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:text="@string/search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/about_options_fragment"
+            app:layout_constraintStart_toStartOf="@+id/about_options_fragment" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
