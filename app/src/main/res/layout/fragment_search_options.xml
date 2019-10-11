@@ -30,12 +30,31 @@
             app:layout_constraintTop_toBottomOf="@+id/about_options_fragment" />
 
         <NumberPicker
-            android:id="@+id/number_picker_minimum_magnitude"
+            android:id="@+id/number_picker_min_magnitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/min_mag_text_view" />
+
+        <TextView
+            android:id="@+id/max_mag_text_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/layout_padding"
+            android:text="@string/maximum_magnitude"
+            android:textSize="@dimen/options_fragment_category_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/number_picker_min_magnitude" />
+
+        <NumberPicker
+            android:id="@+id/number_picker_max_magnitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/max_mag_text_view" />
 
         <Button
             android:id="@+id/button_search"

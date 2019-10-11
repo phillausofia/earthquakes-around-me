@@ -6,4 +6,5 @@
     <string name="search">Search</string>
     <string name="search_options">Search Options</string>
     <string name="no_results">We couldn\'t find any results.</string>
+    <string name="maximum_magnitude">Maximum magnitude</string>
 </resources>

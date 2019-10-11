@@ -27,6 +27,8 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
 
     private var minMagnitude = Util.MIN_MAGNITUDE
 
+    private var maxMagnitude = Util.MAX_MAGNITUDE
+
     private val viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -34,6 +36,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
     init {
         if (searchOptions != null) {
             minMagnitude = searchOptions.minMagnitude
+            maxMagnitude = searchOptions.maxMagnitude
         }
         getLatestEarthquakes()
     }
@@ -45,6 +48,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
                     Util.LONGITUDE,
                     Util.MAX_RADIUS_KM,
                     minMagnitude,
+                    maxMagnitude,
                     Util.ORDER_BY,
                     resultsLimit)
             try {

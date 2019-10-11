@@ -19,7 +19,13 @@ class SearchOptionsFragment: Fragment() {
         val binding = DataBindingUtil.inflate<FragmentSearchOptionsBinding>(inflater,
             R.layout.fragment_search_options, container, false)
 
-        binding.numberPickerMinimumMagnitude.apply {
+        binding.numberPickerMinMagnitude.apply {
+            minValue = 0
+            maxValue = 10
+            wrapSelectorWheel = true
+        }
+
+        binding.numberPickerMaxMagnitude.apply {
             minValue = 0
             maxValue = 10
             wrapSelectorWheel = true
@@ -29,7 +35,8 @@ class SearchOptionsFragment: Fragment() {
             view.findNavController()
                 .navigate(SearchOptionsFragmentDirections
                     .actionSearchOptionsFragmentToOverviewFragment(SearchOptions(
-                        binding.numberPickerMinimumMagnitude.value
+                        binding.numberPickerMinMagnitude.value,
+                        binding.numberPickerMaxMagnitude.value
                     )))
         }
 
