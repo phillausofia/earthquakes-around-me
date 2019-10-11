@@ -5,4 +5,5 @@
     <string name="minimum_magnitude">Minimum magnitude</string>
     <string name="search">Search</string>
     <string name="search_options">Search Options</string>
+    <string name="no_results">We couldn\'t find any results.</string>
 </resources>

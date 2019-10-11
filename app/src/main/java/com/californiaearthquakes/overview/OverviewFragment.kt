@@ -48,6 +48,8 @@ class OverviewFragment: Fragment() {
 
         binding.earthquakesList.adapter = adapter
 
+
+
         //Add dividers to list
         binding.earthquakesList.addItemDecoration(DividerItemDecoration(this.context,
             DividerItemDecoration.VERTICAL))
@@ -57,6 +59,13 @@ class OverviewFragment: Fragment() {
             list ->
             if (list.isNotEmpty()) {
                 binding.mainProgressBar.visibility = View.GONE
+            } else {
+                binding.apply {
+                    earthquakesList.visibility = View.GONE
+                    emptyView.visibility = View.VISIBLE
+                    mainProgressBar.visibility = View.GONE
+                }
+
             }
         })
 
