@@ -65,16 +65,17 @@ class OverviewFragment: Fragment() {
                     emptyView.visibility = View.VISIBLE
                     mainProgressBar.visibility = View.GONE
                 }
-
             }
         })
 
+        //We save the initial padding value so we can use it latter
         val paddingBottom = binding.earthquakesList.paddingBottom
 
         viewModel.isLoadingMoreResuls.observe(this, Observer {isLoading ->
             if (isLoading) {
                 binding.scrollProgressBar.visibility = View.VISIBLE
-                binding.earthquakesList.setPadding(0, 0, 0, paddingBottom)
+                binding.earthquakesList.setPadding(0, 0, 0,
+                    paddingBottom) //takes in px, not dp
             }
             else {
                 binding.scrollProgressBar.visibility = View.GONE
