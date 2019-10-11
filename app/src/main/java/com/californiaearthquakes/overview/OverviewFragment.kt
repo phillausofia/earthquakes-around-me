@@ -3,6 +3,7 @@ package com.californiaearthquakes.overview
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.californiaearthquakes.R
 import com.californiaearthquakes.databinding.FragmentOverviewBinding
 import com.californiaearthquakes.search_options.SearchOptions
+import kotlinx.android.synthetic.main.fragment_overview.view.*
 
 class OverviewFragment: Fragment() {
 
@@ -28,7 +30,6 @@ class OverviewFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
-        Log.i("onCreateView", "onCreateView method called")
         val binding: FragmentOverviewBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview, container, false)
 
         binding.lifecycleOwner = this
@@ -59,12 +60,16 @@ class OverviewFragment: Fragment() {
             }
         })
 
+        val paddingBottom = binding.earthquakesList.paddingBottom
+
         viewModel.isLoadingMoreResuls.observe(this, Observer {isLoading ->
             if (isLoading) {
                 binding.scrollProgressBar.visibility = View.VISIBLE
+                binding.earthquakesList.setPadding(0, 0, 0, paddingBottom)
             }
             else {
                 binding.scrollProgressBar.visibility = View.GONE
+                binding.earthquakesList.updatePadding(0, 0, 0, 0)
             }
         })
 
