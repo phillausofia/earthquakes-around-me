@@ -1,8 +1,8 @@
 package com.californiaearthquakes.overview
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -14,23 +14,34 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.californiaearthquakes.R
 import com.californiaearthquakes.databinding.FragmentOverviewBinding
+import com.californiaearthquakes.search_options.SearchOptions
 
 class OverviewFragment: Fragment() {
 
-    private val viewModel: OverviewViewModule by lazy {
-        ViewModelProviders.of(this).get(OverviewViewModule::class.java)
-    }
 
     private val adapter: EarthquakeAdapter by lazy {
         EarthquakeAdapter()
     }
 
+    private var searchOptions: SearchOptions? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
+        Log.i("onCreateView", "onCreateView method called")
         val binding: FragmentOverviewBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview, container, false)
 
         binding.lifecycleOwner = this
+
+        try {
+            searchOptions = OverviewFragmentArgs.fromBundle(arguments!!).searchOptions
+        } catch (e: Exception) {
+        }
+
+        val viewModelFactory = OverviewViewModelFactory(searchOptions)
+
+        val viewModel = ViewModelProviders.of(this,
+            viewModelFactory).get(OverviewViewModel::class.java)
 
         binding.viewModel = viewModel
 
@@ -88,13 +99,4 @@ class OverviewFragment: Fragment() {
                 || super.onOptionsItemSelected(item)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        try {
-            val minMagnitude = OverviewFragmentArgs.fromBundle(arguments!!).minMagnitude
-            Toast.makeText(this.context, "$minMagnitude", Toast.LENGTH_SHORT).show()
-        } catch (e: Exception) {
-            Toast.makeText(this.context, "${e.message}", Toast.LENGTH_SHORT).show()
-        }
-    }
 }

@@ -28,8 +28,9 @@ class SearchOptionsFragment: Fragment() {
         binding.buttonSearch.setOnClickListener{view ->
             view.findNavController()
                 .navigate(SearchOptionsFragmentDirections
-                    .actionSearchOptionsFragmentToOverviewFragment(binding
-                        .numberPickerMinimumMagnitude.value))
+                    .actionSearchOptionsFragmentToOverviewFragment(SearchOptions(
+                        binding.numberPickerMinimumMagnitude.value
+                    )))
         }
 
         return binding.root

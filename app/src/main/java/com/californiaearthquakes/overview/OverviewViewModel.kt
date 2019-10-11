@@ -10,9 +10,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import android.os.Bundle
+import com.californiaearthquakes.search_options.SearchOptions
 
 
-class OverviewViewModule : ViewModel() {
+class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel() {
 
     private val _earthquakes = MutableLiveData<List<Earthquake>>()
     val earthquakes : LiveData<List<Earthquake>>
@@ -31,6 +32,9 @@ class OverviewViewModule : ViewModel() {
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     init {
+        if (searchOptions != null) {
+            minMagnitude = searchOptions.minMagnitude
+        }
         getLatestEarthquakes()
     }
     private fun getLatestEarthquakes() {

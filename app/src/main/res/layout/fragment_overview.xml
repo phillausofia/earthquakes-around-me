@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.californiaearthquakes.overview.OverviewViewModule" />
+            type="com.californiaearthquakes.overview.OverviewViewModel" />
     </data>
 
         <androidx.constraintlayout.widget.ConstraintLayout
