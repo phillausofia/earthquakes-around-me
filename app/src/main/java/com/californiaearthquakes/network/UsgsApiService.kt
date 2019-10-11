@@ -29,8 +29,8 @@ interface UsgsApiService {
                        @Query("latitude") latitude: Double,
                        @Query("longitude") longitude: Double,
                        @Query("maxradiuskm") maxradiuskm: Double,
-                       @Query("minmagnitude") minmagnitude: Int,
-                       @Query("maxmagnitude") maxmagnitude: Int,
+                       @Query("minmagnitude") minmagnitude: Int?,
+                       @Query("maxmagnitude") maxmagnitude: Int?,
                        @Query("orderby") orderby: String,
                        @Query("limit") limit: Int
     ) : Deferred<Model.Result>

@@ -25,9 +25,9 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
 
     private var resultsLimit = 10
 
-    private var minMagnitude = Util.MIN_MAGNITUDE
+    private var minMagnitude: Int? = null
 
-    private var maxMagnitude = Util.MAX_MAGNITUDE
+    private var maxMagnitude: Int? = null
 
     private val viewModelJob = Job()
 

@@ -4,5 +4,5 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class SearchOptions(val minMagnitude: Int,
-                         val maxMagnitude: Int): Parcelable
+data class SearchOptions(val minMagnitude: Int?,
+                         val maxMagnitude: Int?): Parcelable
