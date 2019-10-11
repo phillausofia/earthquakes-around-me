@@ -23,6 +23,7 @@
         <action
             android:id="@+id/action_searchOptionsFragment_to_overviewFragment"
             app:destination="@id/overviewFragment"
-            app:popUpTo="@+id/overviewFragment" />
+            app:popUpTo="@+id/overviewFragment" >
+        </action>
     </fragment>
 </navigation>

@@ -66,9 +66,9 @@ class OverviewFragment: Fragment() {
                     val lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
                     val totalItemCount = layoutManager.itemCount
                     val scrollThreshold = 2
-                    if (!(viewModel.isLoadingMoreResuls.value!!) && totalItemCount <= lastVisibleItemPosition + 1 + scrollThreshold) {
-                        viewModel.getMoreResults()
-                    }
+                        if (!(viewModel.isLoadingMoreResuls.value!!) && totalItemCount <= lastVisibleItemPosition + 1 + scrollThreshold) {
+                            viewModel.getMoreResults()
+                        }
 
                 }
             }
@@ -88,5 +88,13 @@ class OverviewFragment: Fragment() {
                 || super.onOptionsItemSelected(item)
     }
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        try {
+            val minMagnitude = OverviewFragmentArgs.fromBundle(arguments!!).minMagnitude
+            Toast.makeText(this.context, "$minMagnitude", Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            Toast.makeText(this.context, "${e.message}", Toast.LENGTH_SHORT).show()
+        }
+    }
 }
