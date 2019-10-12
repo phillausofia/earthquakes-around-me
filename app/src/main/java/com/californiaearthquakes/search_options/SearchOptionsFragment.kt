@@ -44,18 +44,25 @@ class SearchOptionsFragment: Fragment() {
                     View.GONE
             }
         }
+        binding.checkBoxMaxRadiusKm.setOnClickListener {
+            binding.editTextMaxRadiusKm.apply {
+                visibility = if (binding.checkBoxMaxRadiusKm.isChecked) View.VISIBLE else
+                    View.GONE
+            }
+        }
 
+        //Initializing the number pickers
         binding.numberPickerMinMagnitude.apply {
             minValue = 0
             maxValue = 10
             wrapSelectorWheel = true
         }
-
         binding.numberPickerMaxMagnitude.apply {
             minValue = 0
             maxValue = 10
             wrapSelectorWheel = true
         }
+
 
         binding.buttonSearch.setOnClickListener{view ->
             view.findNavController()

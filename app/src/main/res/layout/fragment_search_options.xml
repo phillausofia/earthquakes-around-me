@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
+<layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
@@ -64,7 +64,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/order_by_search_options_radio_group" />
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_max_radius_km" />
 
             <CheckBox
                 android:id="@+id/check_box_min_mag"
@@ -105,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/layout_padding"
                 android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/order_by_text_view">
 
@@ -132,6 +133,37 @@
                     android:layout_height="wrap_content"
                     android:text="@string/mag_asc" />
             </RadioGroup>
+
+            <TextView
+                android:id="@+id/max_radius_km_text_view"
+                style="@style/search_options_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/maximum_km"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/order_by_search_options_radio_group" />
+
+            <CheckBox
+                android:id="@+id/check_box_max_radius_km"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/max_radius_km_text_view"
+                app:layout_constraintStart_toEndOf="@+id/max_radius_km_text_view"
+                app:layout_constraintTop_toTopOf="@+id/max_radius_km_text_view" />
+
+            <EditText
+                android:id="@+id/edit_text_max_radius_km"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/number_between_zero_twenty_thousand"
+                android:inputType="number"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/max_radius_km_text_view"
+                android:autofillHints="@string/number_between_zero_twenty_thousand"
+                tools:targetApi="o" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
