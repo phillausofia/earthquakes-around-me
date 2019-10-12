@@ -76,8 +76,19 @@ class SearchOptionsFragment: Fragment() {
             binding.numberPickerMinMagnitude.value else null
         val maxMag = if (binding.checkBoxMaxMag.isChecked)
             binding.numberPickerMaxMagnitude.value else null
-        return SearchOptions(minMag, maxMag)
+        val orderBy = if (binding.checkBoxOrderBy.isChecked)
+            getOrderBySearchOptions(binding) else null
+        return SearchOptions(minMag, maxMag, orderBy)
 
     }
+
+    private fun getOrderBySearchOptions(binding: FragmentSearchOptionsBinding) =
+        when(binding.orderBySearchOptionsRadioGroup.checkedRadioButtonId) {
+            binding.timeDescRadioButton.id -> "time"
+            binding.timeAscRadioButton.id -> "time-asc"
+            binding.magDescRadioButton.id -> "magnitude"
+            binding.magAscRadioButton.id -> "magnitude-asc"
+            else -> null
+        }
 
 }

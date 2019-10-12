@@ -29,6 +29,8 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
 
     private var maxMagnitude: Int? = null
 
+    private var orderBy: String = Util.ORDER_BY
+
     private val viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -37,6 +39,8 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
         if (searchOptions != null) {
             minMagnitude = searchOptions.minMagnitude
             maxMagnitude = searchOptions.maxMagnitude
+            orderBy = if (searchOptions.orderBy != null && searchOptions.orderBy != orderBy) searchOptions.orderBy else
+                orderBy
         }
         getLatestEarthquakes()
     }
@@ -49,7 +53,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
                     Util.MAX_RADIUS_KM,
                     minMagnitude,
                     maxMagnitude,
-                    Util.ORDER_BY,
+                    orderBy,
                     resultsLimit)
             try {
                 val result = getEarthquakesDeffered.await()
