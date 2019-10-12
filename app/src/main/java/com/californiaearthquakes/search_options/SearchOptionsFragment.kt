@@ -23,8 +23,8 @@ class SearchOptionsFragment: Fragment() {
             R.layout.fragment_search_options, container, false)
 
         /*
-        If the user wants to set a minimum or maximum magnitude,
-        we show the values
+        The search options for a parameter will appear only if the user wants to set that
+        specific search parameter
          */
         binding.checkBoxMinMag.setOnClickListener {
             binding.numberPickerMinMagnitude.apply {
@@ -35,6 +35,12 @@ class SearchOptionsFragment: Fragment() {
         binding.checkBoxMaxMag.setOnClickListener {
             binding.numberPickerMaxMagnitude.apply {
                 visibility = if (binding.checkBoxMaxMag.isChecked) View.VISIBLE else
+                    View.GONE
+            }
+        }
+        binding.checkBoxOrderBy.setOnClickListener {
+            binding.orderBySearchOptionsLayout.apply {
+                visibility = if (binding.checkBoxOrderBy.isChecked) View.VISIBLE else
                     View.GONE
             }
         }

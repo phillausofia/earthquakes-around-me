@@ -7,4 +7,9 @@
     <string name="search_options">Search Options</string>
     <string name="no_results">We couldn\'t find any results.</string>
     <string name="maximum_magnitude">Maximum magnitude</string>
+    <string name="order_by_">Order by</string>
+    <string name="time_desc">time (descending)</string>
+    <string name="time_asc">time (ascending)</string>
+    <string name="mag_desc">magnitude (descending)</string>
+    <string name="mag_asc">magnitude (ascending)</string>
 </resources>

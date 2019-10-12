@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,13 +21,10 @@
 
         <TextView
             android:id="@+id/min_mag_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
             android:text="@string/minimum_magnitude"
-            android:textSize="@dimen/options_fragment_category_text_size"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/about_options_fragment" />
+            app:layout_constraintTop_toBottomOf="@+id/about_options_fragment"
+            style="@style/search_options_category" />
 
         <NumberPicker
             android:id="@+id/number_picker_min_magnitude"
@@ -39,13 +37,10 @@
 
         <TextView
             android:id="@+id/max_mag_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/layout_padding"
             android:text="@string/maximum_magnitude"
-            android:textSize="@dimen/options_fragment_category_text_size"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/number_picker_min_magnitude" />
+            app:layout_constraintTop_toBottomOf="@+id/number_picker_min_magnitude"
+            style="@style/search_options_category"/>
 
         <NumberPicker
             android:id="@+id/number_picker_max_magnitude"
@@ -72,7 +67,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/min_mag_text_view"
             app:layout_constraintStart_toEndOf="@+id/min_mag_text_view"
-            app:layout_constraintTop_toBottomOf="@+id/about_options_fragment" />
+            app:layout_constraintTop_toTopOf="@+id/min_mag_text_view" />
 
         <CheckBox
             android:id="@+id/check_box_max_mag"
@@ -81,6 +76,58 @@
             app:layout_constraintBottom_toBottomOf="@+id/max_mag_text_view"
             app:layout_constraintStart_toEndOf="@+id/max_mag_text_view"
             app:layout_constraintTop_toTopOf="@+id/max_mag_text_view" />
+
+        <TextView
+            android:id="@+id/order_by_text_view"
+            style="@style/search_options_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/order_by_"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/max_mag_text_view" />
+
+        <CheckBox
+            android:id="@+id/check_box_order_by"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/order_by_text_view"
+            app:layout_constraintStart_toEndOf="@+id/order_by_text_view"
+            app:layout_constraintTop_toTopOf="@+id/order_by_text_view" />
+
+        <LinearLayout
+            android:id="@+id/order_by_search_options_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/layout_padding"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/order_by_text_view">
+
+            <CheckBox
+                android:id="@+id/check_box_by_time_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/time_desc" />
+
+            <CheckBox
+                android:id="@+id/check_box_time_ascending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/time_asc" />
+
+            <CheckBox
+                android:id="@+id/check_box_mag_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mag_desc" />
+
+            <CheckBox
+                android:id="@+id/check_box_mag_asc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/mag_asc" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
