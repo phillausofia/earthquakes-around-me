@@ -11,13 +11,33 @@ import com.californiaearthquakes.R
 import com.californiaearthquakes.databinding.FragmentSearchOptionsBinding
 
 
+
 class SearchOptionsFragment: Fragment() {
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
 
         val binding = DataBindingUtil.inflate<FragmentSearchOptionsBinding>(inflater,
             R.layout.fragment_search_options, container, false)
+
+        /*
+        If the user wants to set a minimum or maximum magnitude,
+        we show the values
+         */
+        binding.checkBoxMinMag.setOnClickListener {
+            binding.numberPickerMinMagnitude.apply {
+                visibility = if (binding.checkBoxMinMag.isChecked) View.VISIBLE else
+                    View.GONE
+            }
+        }
+        binding.checkBoxMaxMag.setOnClickListener {
+            binding.numberPickerMaxMagnitude.apply {
+                visibility = if (binding.checkBoxMaxMag.isChecked) View.VISIBLE else
+                    View.GONE
+            }
+        }
 
         binding.numberPickerMinMagnitude.apply {
             minValue = 0
@@ -34,13 +54,24 @@ class SearchOptionsFragment: Fragment() {
         binding.buttonSearch.setOnClickListener{view ->
             view.findNavController()
                 .navigate(SearchOptionsFragmentDirections
-                    .actionSearchOptionsFragmentToOverviewFragment(SearchOptions(
-                        binding.numberPickerMinMagnitude.value,
-                        binding.numberPickerMaxMagnitude.value
+                    .actionSearchOptionsFragmentToOverviewFragment(getSearchOptions(
+                        binding
                     )))
         }
 
+
         return binding.root
+    }
+
+    private fun getSearchOptions(
+        binding: FragmentSearchOptionsBinding) : SearchOptions {
+
+        val minMag = if (binding.checkBoxMinMag.isChecked)
+            binding.numberPickerMinMagnitude.value else null
+        val maxMag = if (binding.checkBoxMaxMag.isChecked)
+            binding.numberPickerMaxMagnitude.value else null
+        return SearchOptions(minMag, maxMag)
+
     }
 
 }

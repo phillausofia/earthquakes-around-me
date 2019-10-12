@@ -20,12 +20,11 @@
 
         <TextView
             android:id="@+id/min_mag_text_view"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/layout_padding"
             android:text="@string/minimum_magnitude"
             android:textSize="@dimen/options_fragment_category_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/about_options_fragment" />
 
@@ -33,18 +32,18 @@
             android:id="@+id/number_picker_min_magnitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/min_mag_text_view" />
 
         <TextView
             android:id="@+id/max_mag_text_view"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/layout_padding"
             android:text="@string/maximum_magnitude"
             android:textSize="@dimen/options_fragment_category_text_size"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/number_picker_min_magnitude" />
 
@@ -52,6 +51,7 @@
             android:id="@+id/number_picker_max_magnitude"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/max_mag_text_view" />
@@ -65,6 +65,22 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/about_options_fragment"
             app:layout_constraintStart_toStartOf="@+id/about_options_fragment" />
+
+        <CheckBox
+            android:id="@+id/check_box_min_mag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/min_mag_text_view"
+            app:layout_constraintStart_toEndOf="@+id/min_mag_text_view"
+            app:layout_constraintTop_toBottomOf="@+id/about_options_fragment" />
+
+        <CheckBox
+            android:id="@+id/check_box_max_mag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/max_mag_text_view"
+            app:layout_constraintStart_toEndOf="@+id/max_mag_text_view"
+            app:layout_constraintTop_toTopOf="@+id/max_mag_text_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
