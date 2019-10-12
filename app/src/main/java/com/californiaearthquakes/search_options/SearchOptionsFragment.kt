@@ -39,7 +39,7 @@ class SearchOptionsFragment: Fragment() {
             }
         }
         binding.checkBoxOrderBy.setOnClickListener {
-            binding.orderBySearchOptionsLayout.apply {
+            binding.orderBySearchOptionsRadioGroup.apply {
                 visibility = if (binding.checkBoxOrderBy.isChecked) View.VISIBLE else
                     View.GONE
             }

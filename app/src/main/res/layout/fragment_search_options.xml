@@ -94,40 +94,40 @@
             app:layout_constraintStart_toEndOf="@+id/order_by_text_view"
             app:layout_constraintTop_toTopOf="@+id/order_by_text_view" />
 
-        <LinearLayout
-            android:id="@+id/order_by_search_options_layout"
+        <RadioGroup
+            android:id="@+id/order_by_search_options_radio_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="@dimen/layout_padding"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/order_by_text_view">
 
-            <CheckBox
-                android:id="@+id/check_box_by_time_desc"
+            <RadioButton
+                android:id="@+id/time_desc_radio_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/time_desc" />
 
-            <CheckBox
-                android:id="@+id/check_box_time_ascending"
+            <RadioButton
+                android:id="@+id/time_asc_radio_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/time_asc" />
 
-            <CheckBox
-                android:id="@+id/check_box_mag_desc"
+            <RadioButton
+                android:id="@+id/mag_desc_radio_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/mag_desc" />
 
-            <CheckBox
-                android:id="@+id/check_box_mag_asc"
+            <RadioButton
+                android:id="@+id/mag_asc_radio_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/mag_asc" />
-        </LinearLayout>
+        </RadioGroup>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
