@@ -28,7 +28,7 @@ interface UsgsApiService {
     fun getEarthquakes(@Query("format") format: String,
                        @Query("latitude") latitude: Double,
                        @Query("longitude") longitude: Double,
-                       @Query("maxradiuskm") maxradiuskm: Double,
+                       @Query("maxradiuskm") maxradiuskm: Int,
                        @Query("minmagnitude") minmagnitude: Int?,
                        @Query("maxmagnitude") maxmagnitude: Int?,
                        @Query("orderby") orderby: String,

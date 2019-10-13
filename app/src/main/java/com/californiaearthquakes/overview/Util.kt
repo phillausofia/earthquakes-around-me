@@ -3,7 +3,7 @@ package com.californiaearthquakes.overview
 object Util {
 
     val RESULTS_FORMAT = "geojson"
-    val MAX_RADIUS_KM = 500.0
+    val MAX_RADIUS_KM = 500
     val ORDER_BY = "time"
     val MIN_MAGNITUDE = -1
     val MAX_MAGNITUDE = 10

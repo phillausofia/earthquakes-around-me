@@ -31,6 +31,8 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
 
     private var orderBy: String = Util.ORDER_BY
 
+    private var maxRadiusKm = Util.MAX_RADIUS_KM
+
     private val viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -41,6 +43,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
             maxMagnitude = searchOptions.maxMagnitude
             orderBy = if (searchOptions.orderBy != null && searchOptions.orderBy != orderBy) searchOptions.orderBy else
                 orderBy
+            maxRadiusKm = searchOptions.maxRadiusKm ?: maxRadiusKm
         }
         getLatestEarthquakes()
     }
@@ -50,7 +53,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
                 UsgsApi.usgsApiService.getEarthquakes(Util.RESULTS_FORMAT,
                     Util.LATITUDE,
                     Util.LONGITUDE,
-                    Util.MAX_RADIUS_KM,
+                    maxRadiusKm,
                     minMagnitude,
                     maxMagnitude,
                     orderBy,

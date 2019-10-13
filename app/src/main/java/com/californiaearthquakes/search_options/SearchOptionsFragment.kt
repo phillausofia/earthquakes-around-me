@@ -85,7 +85,9 @@ class SearchOptionsFragment: Fragment() {
             binding.numberPickerMaxMagnitude.value else null
         val orderBy = if (binding.checkBoxOrderBy.isChecked)
             getOrderBySearchOptions(binding) else null
-        return SearchOptions(minMag, maxMag, orderBy)
+        val maxRadiusKm = if (binding.checkBoxOrderBy.isChecked)
+            Integer.parseInt(binding.editTextMaxRadiusKm.text.toString()) else null
+        return SearchOptions(minMag, maxMag, orderBy, maxRadiusKm)
 
     }
 
