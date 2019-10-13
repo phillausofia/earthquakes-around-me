@@ -32,6 +32,8 @@ class SearchOptionsFragment: Fragment() {
         makeViewVisibleDependingOnCheckBox(binding.numberPickerMaxMagnitude, binding.checkBoxMaxMag)
         makeViewVisibleDependingOnCheckBox(binding.orderBySearchOptionsRadioGroup, binding.checkBoxOrderBy)
         makeViewVisibleDependingOnCheckBox(binding.editTextMaxRadiusKm, binding.checkBoxMaxRadiusKm)
+        makeViewVisibleDependingOnCheckBox(binding.editTextStartDate, binding.checkBoxStartDate)
+        makeViewVisibleDependingOnCheckBox(binding.editTextEndDate, binding.checkBoxEndDate)
 
 
         //Initializing the number pickers

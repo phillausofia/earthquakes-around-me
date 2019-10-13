@@ -64,7 +64,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/edit_text_max_radius_km" />
+                app:layout_constraintTop_toBottomOf="@id/edit_text_end_date" />
 
             <CheckBox
                 android:id="@+id/check_box_min_mag"
@@ -156,8 +156,67 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/max_radius_km_text_view"
-                android:autofillHints="@string/number_between_zero_twenty_thousand"
-                tools:targetApi="o" />
+                android:importantForAutofill="no" />
+
+            <TextView
+                android:id="@+id/text_view_start_date"
+                style="@style/search_options_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/start_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_max_radius_km" />
+
+            <CheckBox
+                android:id="@+id/check_box_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_start_date"
+                app:layout_constraintStart_toEndOf="@+id/text_view_start_date"
+                app:layout_constraintTop_toTopOf="@+id/text_view_start_date" />
+
+            <EditText
+                android:id="@+id/edit_text_start_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/date_format"
+                android:inputType="date"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_start_date"
+                android:importantForAutofill="no" />
+
+            <TextView
+                android:id="@+id/text_view_end_date"
+                style="@style/search_options_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/end_date"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/edit_text_start_date" />
+
+            <CheckBox
+                android:id="@+id/check_box_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_end_date"
+                app:layout_constraintStart_toEndOf="@+id/text_view_end_date"
+                app:layout_constraintTop_toTopOf="@+id/text_view_end_date" />
+
+            <EditText
+                android:id="@+id/edit_text_end_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/date_format"
+                android:inputType="date"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_end_date"
+                android:importantForAutofill="no" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
