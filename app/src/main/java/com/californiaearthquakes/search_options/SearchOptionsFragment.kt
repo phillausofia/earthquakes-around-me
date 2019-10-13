@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -26,30 +27,11 @@ class SearchOptionsFragment: Fragment() {
         The search options for a parameter will appear only if the user wants to set that
         specific search parameter
          */
-        binding.checkBoxMinMag.setOnClickListener {
-            binding.numberPickerMinMagnitude.apply {
-                visibility = if (binding.checkBoxMinMag.isChecked) View.VISIBLE else
-                    View.GONE
-            }
-        }
-        binding.checkBoxMaxMag.setOnClickListener {
-            binding.numberPickerMaxMagnitude.apply {
-                visibility = if (binding.checkBoxMaxMag.isChecked) View.VISIBLE else
-                    View.GONE
-            }
-        }
-        binding.checkBoxOrderBy.setOnClickListener {
-            binding.orderBySearchOptionsRadioGroup.apply {
-                visibility = if (binding.checkBoxOrderBy.isChecked) View.VISIBLE else
-                    View.GONE
-            }
-        }
-        binding.checkBoxMaxRadiusKm.setOnClickListener {
-            binding.editTextMaxRadiusKm.apply {
-                visibility = if (binding.checkBoxMaxRadiusKm.isChecked) View.VISIBLE else
-                    View.GONE
-            }
-        }
+        makeViewVisibleDependingOnCheckBox(binding.numberPickerMinMagnitude, binding.checkBoxMinMag)
+        makeViewVisibleDependingOnCheckBox(binding.numberPickerMaxMagnitude, binding.checkBoxMaxMag)
+        makeViewVisibleDependingOnCheckBox(binding.orderBySearchOptionsRadioGroup, binding.checkBoxOrderBy)
+        makeViewVisibleDependingOnCheckBox(binding.editTextMaxRadiusKm, binding.checkBoxMaxRadiusKm)
+
 
         //Initializing the number pickers
         binding.numberPickerMinMagnitude.apply {
@@ -100,4 +82,12 @@ class SearchOptionsFragment: Fragment() {
             else -> null
         }
 
+    private fun makeViewVisibleDependingOnCheckBox(viewToBecameVisibile: View, checkBox: CheckBox) {
+        checkBox.setOnClickListener {
+            viewToBecameVisibile.apply {
+                visibility = if (checkBox.isChecked) View.VISIBLE else View.GONE
+            }
+        }
+
+    }
 }
