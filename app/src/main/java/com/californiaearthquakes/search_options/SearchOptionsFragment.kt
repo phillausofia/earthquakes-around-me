@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
+import android.widget.NumberPicker
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
@@ -34,16 +35,8 @@ class SearchOptionsFragment: Fragment() {
 
 
         //Initializing the number pickers
-        binding.numberPickerMinMagnitude.apply {
-            minValue = 0
-            maxValue = 10
-            wrapSelectorWheel = true
-        }
-        binding.numberPickerMaxMagnitude.apply {
-            minValue = 0
-            maxValue = 10
-            wrapSelectorWheel = true
-        }
+        binding.numberPickerMinMagnitude.initializeNumberPicker()
+        binding.numberPickerMaxMagnitude.initializeNumberPicker()
 
 
         binding.buttonSearch.setOnClickListener{view ->
@@ -58,6 +51,12 @@ class SearchOptionsFragment: Fragment() {
         return binding.root
     }
 
+    private fun NumberPicker.initializeNumberPicker() {
+        minValue = 0
+        maxValue = 10
+        wrapSelectorWheel = true
+    }
+
     private fun getSearchOptions(
         binding: FragmentSearchOptionsBinding) : SearchOptions {
 
@@ -66,14 +65,14 @@ class SearchOptionsFragment: Fragment() {
         val maxMag = if (binding.checkBoxMaxMag.isChecked)
             binding.numberPickerMaxMagnitude.value else null
         val orderBy = if (binding.checkBoxOrderBy.isChecked)
-            getOrderBySearchOptions(binding) else null
+            getOrderBySearchOption(binding) else null
         val maxRadiusKm = if (binding.checkBoxMaxRadiusKm.isChecked)
             Integer.parseInt(binding.editTextMaxRadiusKm.text.toString()) else null
         return SearchOptions(minMag, maxMag, orderBy, maxRadiusKm)
 
     }
 
-    private fun getOrderBySearchOptions(binding: FragmentSearchOptionsBinding) =
+    private fun getOrderBySearchOption(binding: FragmentSearchOptionsBinding) =
         when(binding.orderBySearchOptionsRadioGroup.checkedRadioButtonId) {
             binding.timeDescRadioButton.id -> "time"
             binding.timeAscRadioButton.id -> "time-asc"
