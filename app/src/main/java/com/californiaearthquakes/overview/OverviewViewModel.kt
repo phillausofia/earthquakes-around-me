@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import com.californiaearthquakes.search_options.SearchOptions
 
 
-class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel() {
+class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
 
     private val _earthquakes = MutableLiveData<List<Earthquake>>()
     val earthquakes : LiveData<List<Earthquake>>
@@ -22,7 +22,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
     val isLoadingMoreResuls : LiveData<Boolean>
         get() = _isLoadingMoreResults
 
-    private var resultsLimit = 10
+    private var resultsLimit = Utils.INITIAL_VALUES.RESULS_LIMIT
 
     private var minMagnitude: Int? = null
 
@@ -40,15 +40,14 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
         if (searchOptions != null) {
             minMagnitude = searchOptions.minMagnitude
             maxMagnitude = searchOptions.maxMagnitude
-            orderBy = if (searchOptions.orderBy != null && searchOptions.orderBy != orderBy) searchOptions.orderBy else
-                orderBy
-            maxRadiusKm = searchOptions.maxRadiusKm ?: maxRadiusKm
+            searchOptions.orderBy?.let { orderBy = it }
+            searchOptions.maxRadiusKm?.let { maxRadiusKm = it}
         }
         getLatestEarthquakes()
     }
     private fun getLatestEarthquakes() {
         coroutineScope.launch {
-            val getEarthquakesDeffered =
+            val getEarthquakesDeferred =
                 UsgsApi.usgsApiService.getEarthquakes(Utils.FINAL_CONSTANTS.RESULTS_FORMAT,
                     Utils.FINAL_CONSTANTS.LATITUDE,
                     Utils.FINAL_CONSTANTS.LONGITUDE,
@@ -58,7 +57,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
                     orderBy,
                     resultsLimit)
             try {
-                val result = getEarthquakesDeffered.await()
+                val result = getEarthquakesDeferred.await()
                 _earthquakes.value = result.features.map { it.properties }
                 _isLoadingMoreResults.value = false
 
@@ -81,6 +80,5 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
         _isLoadingMoreResults.value = true
         increaseResultsLimitByTen()
         getLatestEarthquakes()
-
     }
 }

@@ -74,7 +74,6 @@ class SearchOptionsFragment: Fragment() {
 
     private fun getOrderBySearchOption(binding: FragmentSearchOptionsBinding) =
         when(binding.orderBySearchOptionsRadioGroup.checkedRadioButtonId) {
-            binding.timeDescRadioButton.id -> SearchOptionsUtils.UsgsApiOrderByValues.TIME
             binding.timeAscRadioButton.id -> SearchOptionsUtils.UsgsApiOrderByValues.TIME_ASC
             binding.magDescRadioButton.id -> SearchOptionsUtils.UsgsApiOrderByValues.MAG
             binding.magAscRadioButton.id -> SearchOptionsUtils.UsgsApiOrderByValues.MAG_ASC

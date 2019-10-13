@@ -12,5 +12,6 @@ object Utils {
     object INITIAL_VALUES {
         val MAX_RADIUS_KM = 500
         val ORDER_BY = "time"
+        val RESULS_LIMIT = 10
     }
 }

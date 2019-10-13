@@ -110,12 +110,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/order_by_text_view">
 
                 <RadioButton
-                    android:id="@+id/time_desc_radio_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/time_desc" />
-
-                <RadioButton
                     android:id="@+id/time_asc_radio_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
