@@ -9,7 +9,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import android.os.Bundle
 import com.californiaearthquakes.search_options.SearchOptions
 
 
@@ -29,9 +28,9 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
 
     private var maxMagnitude: Int? = null
 
-    private var orderBy: String = Util.ORDER_BY
+    private var orderBy: String = Utils.INITIAL_VALUES.ORDER_BY
 
-    private var maxRadiusKm = Util.MAX_RADIUS_KM
+    private var maxRadiusKm = Utils.INITIAL_VALUES.MAX_RADIUS_KM
 
     private val viewModelJob = Job()
 
@@ -50,9 +49,9 @@ class OverviewViewModel(private val searchOptions: SearchOptions?) : ViewModel()
     private fun getLatestEarthquakes() {
         coroutineScope.launch {
             val getEarthquakesDeffered =
-                UsgsApi.usgsApiService.getEarthquakes(Util.RESULTS_FORMAT,
-                    Util.LATITUDE,
-                    Util.LONGITUDE,
+                UsgsApi.usgsApiService.getEarthquakes(Utils.FINAL_CONSTANTS.RESULTS_FORMAT,
+                    Utils.FINAL_CONSTANTS.LATITUDE,
+                    Utils.FINAL_CONSTANTS.LONGITUDE,
                     maxRadiusKm,
                     minMagnitude,
                     maxMagnitude,
