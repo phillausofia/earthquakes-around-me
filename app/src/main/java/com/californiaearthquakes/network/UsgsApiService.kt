@@ -32,7 +32,9 @@ interface UsgsApiService {
                        @Query("minmagnitude") minmagnitude: Int?,
                        @Query("maxmagnitude") maxmagnitude: Int?,
                        @Query("orderby") orderby: String,
-                       @Query("limit") limit: Int
+                       @Query("limit") limit: Int,
+                       @Query("starttime") starttime: String?,
+                       @Query("endtime") endtime: String?
     ) : Deferred<Model.Result>
 
 

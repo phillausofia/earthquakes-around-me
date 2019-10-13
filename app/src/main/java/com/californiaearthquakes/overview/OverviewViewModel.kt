@@ -28,6 +28,10 @@ class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
 
     private var maxMagnitude: Int? = null
 
+    private var startTime: String? = null
+
+    private var endTime: String? = null
+
     private var orderBy: String = Utils.INITIAL_VALUES.ORDER_BY
 
     private var maxRadiusKm = Utils.INITIAL_VALUES.MAX_RADIUS_KM
@@ -42,6 +46,8 @@ class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
             maxMagnitude = searchOptions.maxMagnitude
             searchOptions.orderBy?.let { orderBy = it }
             searchOptions.maxRadiusKm?.let { maxRadiusKm = it}
+            searchOptions.startTime?.let { startTime = it}
+            searchOptions.endTime?.let { endTime = it}
         }
         getLatestEarthquakes()
     }
@@ -55,7 +61,7 @@ class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
                     minMagnitude,
                     maxMagnitude,
                     orderBy,
-                    resultsLimit)
+                    resultsLimit, startTime, endTime)
             try {
                 val result = getEarthquakesDeferred.await()
                 _earthquakes.value = result.features.map { it.properties }

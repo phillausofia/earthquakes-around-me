@@ -70,7 +70,11 @@ class SearchOptionsFragment: Fragment() {
             getOrderBySearchOption(binding) else null
         val maxRadiusKm = if (binding.checkBoxMaxRadiusKm.isChecked)
             Integer.parseInt(binding.editTextMaxRadiusKm.text.toString()) else null
-        return SearchOptions(minMag, maxMag, orderBy, maxRadiusKm)
+        val startTime = if (binding.checkBoxStartDate.isChecked)
+            binding.editTextStartDate.text.toString().trim() else null
+        val endTime = if (binding.checkBoxEndDate.isChecked)
+            binding.editTextEndDate.text.toString().trim() else null
+        return SearchOptions(minMag, maxMag, orderBy, maxRadiusKm, startTime, endTime)
 
     }
 
