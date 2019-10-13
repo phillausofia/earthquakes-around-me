@@ -52,8 +52,8 @@ class SearchOptionsFragment: Fragment() {
     }
 
     private fun NumberPicker.initializeNumberPicker() {
-        minValue = 0
-        maxValue = 10
+        minValue = SearchOptionsUtils.EARTHQUAKE_MAGNITUDE_RANGE.MIN_MAGNITUDE
+        maxValue = SearchOptionsUtils.EARTHQUAKE_MAGNITUDE_RANGE.MAX_MAGNITUDE
         wrapSelectorWheel = true
     }
 
@@ -74,10 +74,10 @@ class SearchOptionsFragment: Fragment() {
 
     private fun getOrderBySearchOption(binding: FragmentSearchOptionsBinding) =
         when(binding.orderBySearchOptionsRadioGroup.checkedRadioButtonId) {
-            binding.timeDescRadioButton.id -> "time"
-            binding.timeAscRadioButton.id -> "time-asc"
-            binding.magDescRadioButton.id -> "magnitude"
-            binding.magAscRadioButton.id -> "magnitude-asc"
+            binding.timeDescRadioButton.id -> SearchOptionsUtils.UsgsApiOrderByValues.TIME
+            binding.timeAscRadioButton.id -> SearchOptionsUtils.UsgsApiOrderByValues.TIME_ASC
+            binding.magDescRadioButton.id -> SearchOptionsUtils.UsgsApiOrderByValues.MAG
+            binding.magAscRadioButton.id -> SearchOptionsUtils.UsgsApiOrderByValues.MAG_ASC
             else -> null
         }
 
