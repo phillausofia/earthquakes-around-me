@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.californiaearthquakes.R
 import com.californiaearthquakes.databinding.FragmentDetailBinding
 
@@ -22,7 +23,10 @@ class DetailFragment : Fragment() {
 
         val viewModelFactory = DetailViewModelFactory(earthquake)
 
-        binding.textViewEarthquakeSummary.text = earthquake.place
+        binding.viewModel = ViewModelProviders.of(this, viewModelFactory)
+            .get(DetailViewModel::class.java)
+
+        binding.placeTextView.text = earthquake.place
 
         return binding.root
 
