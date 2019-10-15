@@ -1,5 +1,8 @@
 package com.californiaearthquakes.network
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 
 enum class EarthquakeIntensity{
     NOT_EVEN_AN_EARTHQUAKE, LOW, MED, HIGH
@@ -14,12 +17,12 @@ object Model {
     data class Feature(
         val properties: Earthquake
     )
-
+    @Parcelize
     data class Earthquake(
         val mag: Double,
         val place: String,
         val time: Long
-    ) {
+    ): Parcelable {
         val intensity = when (mag) {
             in -10.0..1.99 -> EarthquakeIntensity.NOT_EVEN_AN_EARTHQUAKE
             in 2.0..3.99 -> EarthquakeIntensity.LOW

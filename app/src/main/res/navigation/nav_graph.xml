@@ -13,6 +13,9 @@
         <argument
             android:name="searchOptions"
             app:argType="com.californiaearthquakes.search_options.SearchOptions" />
+        <action
+            android:id="@+id/actionShowEarthquakeDetails"
+            app:destination="@id/detailFragment" />
     </fragment>
 
     <fragment
@@ -25,5 +28,12 @@
             app:destination="@id/overviewFragment"
             app:popUpTo="@+id/overviewFragment" >
         </action>
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.californiaearthquakes.detail.DetailFragment"
+        android:label="DetailFragment" >
+        <argument android:name="earthquake"
+            app:argType="com.californiaearthquakes.network.Model$Earthquake" />
     </fragment>
 </navigation>

@@ -22,6 +22,10 @@ class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
     val isLoadingMoreResuls : LiveData<Boolean>
         get() = _isLoadingMoreResults
 
+    private val _earthquakeToNavigateTo = MutableLiveData<Earthquake>()
+    val earthquakeToNavigateTo : LiveData<Earthquake>
+        get() = _earthquakeToNavigateTo
+
     private var resultsLimit = Utils.INITIAL_VALUES.RESULS_LIMIT
 
     private var minMagnitude: Int? = null
@@ -86,5 +90,13 @@ class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
         _isLoadingMoreResults.value = true
         increaseResultsLimitByTen()
         getLatestEarthquakes()
+    }
+
+    fun displayEarthquakeDetails(earthquakeToNavigateTo: Earthquake) {
+        _earthquakeToNavigateTo.value = earthquakeToNavigateTo
+    }
+
+    fun displayEartquakeDetailsCompleted() {
+        _earthquakeToNavigateTo.value = null
     }
 }

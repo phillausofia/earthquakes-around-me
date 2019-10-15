@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
@@ -20,10 +21,6 @@ import kotlinx.android.synthetic.main.fragment_overview.view.*
 
 class OverviewFragment: Fragment() {
 
-
-    private val adapter: EarthquakeAdapter by lazy {
-        EarthquakeAdapter()
-    }
 
     private var searchOptions: SearchOptions? = null
 
@@ -45,6 +42,10 @@ class OverviewFragment: Fragment() {
             viewModelFactory).get(OverviewViewModel::class.java)
 
         binding.viewModel = viewModel
+
+        val adapter = EarthquakeAdapter(EarthquakeAdapter.OnClickListener {
+            viewModel.displayEarthquakeDetails(it)
+        })
 
         binding.earthquakesList.adapter = adapter
 
@@ -99,6 +100,16 @@ class OverviewFragment: Fragment() {
                 }
             }
         })
+
+
+        viewModel.earthquakeToNavigateTo.observe(this, Observer {
+            if (it != null) {
+
+                this.findNavController().navigate(OverviewFragmentDirections.actionShowEarthquakeDetails(it))
+                viewModel.displayEartquakeDetailsCompleted()
+            }
+        })
+
         setHasOptionsMenu(true)
 
         return binding.root

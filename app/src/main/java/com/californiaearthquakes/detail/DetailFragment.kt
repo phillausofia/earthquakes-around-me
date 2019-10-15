@@ -18,7 +18,11 @@ class DetailFragment : Fragment() {
             R.layout.fragment_detail, container, false)
         binding.lifecycleOwner = this
 
+        val earthquake = DetailFragmentArgs.fromBundle(arguments!!).earthquake
 
+        val viewModelFactory = DetailViewModelFactory(earthquake)
+
+        binding.textViewEarthquakeSummary.text = earthquake.place
 
         return binding.root
 

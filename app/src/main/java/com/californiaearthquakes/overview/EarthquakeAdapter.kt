@@ -2,6 +2,7 @@ package com.californiaearthquakes.overview
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -11,7 +12,7 @@ import com.californiaearthquakes.network.Model
 import com.californiaearthquakes.network.Model.Earthquake
 import kotlinx.android.synthetic.main.fragment_overview.view.*
 
-class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallback) {
+class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EarthquakeViewHolder {
 
         return EarthquakeViewHolder.from(parent)
@@ -19,6 +20,9 @@ class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeVi
 
     override fun onBindViewHolder(holder: EarthquakeViewHolder, position: Int) {
         val earthquake = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(earthquake)
+        }
         holder.bin(earthquake)
     }
 
@@ -49,6 +53,10 @@ class EarthquakeAdapter : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeVi
             return oldItem.time == newItem.time
         }
 
+    }
+
+    class OnClickListener(val clickListener: (earthquake: Earthquake) -> Unit) {
+        fun onClick(earthquake: Earthquake) = clickListener(earthquake)
     }
 
 
