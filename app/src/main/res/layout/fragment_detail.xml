@@ -19,73 +19,92 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/layout_padding">
 
-            <TextView
-                android:id="@+id/title_text_view"
-                style="@style/earthquake_details_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:text="@{viewModel.selectedEarthquake.properties.title}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Big title" />
-
-            <TextView
-                android:id="@+id/place_text_view"
-                android:text="@{viewModel.selectedEarthquake.properties.place}"
-                style="@style/earthquake_details_text_view"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_text_view"
-                tools:text="1km SW of London, UK" />
-
-            <TextView
-                android:id="@+id/time_text_view"
-                style="@style/earthquake_details_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.displayEarthquakeTime}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/place_text_view"
-                tools:text="Wed, 16 Oct 2019 10:06:04 EEST" />
-
-            <TextView
-                android:id="@+id/mag_text_view"
-                style="@style/earthquake_details_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.displayEarthquakeMag}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mag_type_text_view"
-                tools:text="4.9" />
-
-            <TextView
-                android:id="@+id/mag_type_text_view"
-                style="@style/earthquake_details_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.selectedEarthquake.properties.magType}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/time_text_view"
-                tools:text="ml"/>
-
-            <TextView
-                android:id="@+id/depth_text_view"
-                style="@style/earthquake_details_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{viewModel.displayEarthquakeDepth}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mag_text_view"
-                tools:text="4.5"/>
-
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/earthquake_location_map_view"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/depth_text_view"
-                android:apiKey="AIzaSyBRR8nMDfu0E0r0yUpYeaU4K62sDvdvhKs"/>
+                app:layout_constraintTop_toTopOf="parent">
+
+                <TextView
+                    android:id="@+id/title_text_view"
+                    style="@style/earthquake_details_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.selectedEarthquake.properties.title}"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Big title" />
+
+                <TextView
+                    android:id="@+id/place_text_view"
+                    style="@style/earthquake_details_text_view"
+                    android:text="@{viewModel.selectedEarthquake.properties.place}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title_text_view"
+                    tools:text="1km SW of London, UK" />
+
+                <TextView
+                    android:id="@+id/time_text_view"
+                    style="@style/earthquake_details_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.displayEarthquakeTime}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/place_text_view"
+                    tools:text="Wed, 16 Oct 2019 10:06:04 EEST" />
+
+                <TextView
+                    android:id="@+id/mag_text_view"
+                    style="@style/earthquake_details_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.displayEarthquakeMag}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/mag_type_text_view"
+                    tools:text="4.9" />
+
+                <TextView
+                    android:id="@+id/mag_type_text_view"
+                    style="@style/earthquake_details_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.selectedEarthquake.properties.magType}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/time_text_view"
+                    tools:text="ml" />
+
+                <TextView
+                    android:id="@+id/depth_text_view"
+                    style="@style/earthquake_details_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.displayEarthquakeDepth}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/mag_text_view"
+                    tools:text="4.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="200dp"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+                tools:layout_editor_absoluteX="16dp">
+
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/earthquake_location_map_view"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:apiKey="AIzaSyBRR8nMDfu0E0r0yUpYeaU4K62sDvdvhKs"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

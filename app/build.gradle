@@ -78,5 +78,6 @@ dependencies {
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
+
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
