@@ -1,4 +1,4 @@
-package com.californiaearthquakes.search_options
+package com.earthquakesaroundme.search_options
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,10 +10,9 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
-import com.californiaearthquakes.R
-import com.californiaearthquakes.databinding.FragmentSearchOptionsBinding
+import com.earthquakesaroundme.R
+import com.earthquakesaroundme.databinding.FragmentSearchOptionsBinding
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
 
 

@@ -1,4 +1,4 @@
-package com.californiaearthquakes.overview
+package com.earthquakesaroundme.overview
 
 object Utils {
 

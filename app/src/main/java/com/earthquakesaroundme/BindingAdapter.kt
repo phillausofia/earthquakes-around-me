@@ -1,13 +1,12 @@
-package com.californiaearthquakes
+package com.earthquakesaroundme
 
-import android.graphics.Color
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.californiaearthquakes.network.EarthquakeIntensity
-import com.californiaearthquakes.network.Model.Earthquake
-import com.californiaearthquakes.overview.EarthquakeAdapter
+import com.earthquakesaroundme.network.EarthquakeIntensity
+import com.earthquakesaroundme.network.Model.Earthquake
+import com.earthquakesaroundme.overview.EarthquakeAdapter
 import java.text.SimpleDateFormat
 import java.util.*
 

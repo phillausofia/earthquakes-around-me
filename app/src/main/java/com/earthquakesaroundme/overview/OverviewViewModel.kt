@@ -1,15 +1,15 @@
-package com.californiaearthquakes.overview
+package com.earthquakesaroundme.overview
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.californiaearthquakes.network.Model.Earthquake
-import com.californiaearthquakes.network.UsgsApi
+import com.earthquakesaroundme.network.Model.Earthquake
+import com.earthquakesaroundme.network.UsgsApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import com.californiaearthquakes.search_options.SearchOptions
+import com.earthquakesaroundme.search_options.SearchOptions
 
 
 class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {

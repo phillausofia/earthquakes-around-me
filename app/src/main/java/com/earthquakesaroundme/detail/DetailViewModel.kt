@@ -1,10 +1,10 @@
-package com.californiaearthquakes.detail
+package com.earthquakesaroundme.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.californiaearthquakes.network.Model.Earthquake
+import com.earthquakesaroundme.network.Model.Earthquake
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -28,7 +28,13 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
         "${it.geometry.coordinates[2]} km"
     }
 
+
+
     init {
         _selectedEarthquake.value = earthquake
     }
+
+    fun getEarthquakeCoordinates() =
+        Pair(_selectedEarthquake.value!!.geometry.coordinates[1],
+            _selectedEarthquake.value!!.geometry.coordinates[0])
 }

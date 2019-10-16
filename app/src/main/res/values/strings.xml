@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">California Earthquakes</string>
+    <string name="app_name">Earthquakes around Me</string>
     <string name="load_more">Load more</string>
     <string name="about_options_fragment">Here you can modify different parameters of the displayed earthquakes. Like minimum magnitude of maximum magnitude of the earthquakes.</string>
     <string name="minimum_magnitude">Minimum magnitude</string>
@@ -17,5 +17,6 @@
     <string name="start_date">Start date</string>
     <string name="end_date">End date</string>
     <string name="date_format">YYYY-MM-DD</string>
+    <string name="title_activity_maps">Map</string>
 
 </resources>

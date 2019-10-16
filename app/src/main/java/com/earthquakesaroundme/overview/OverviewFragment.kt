@@ -1,7 +1,6 @@
-package com.californiaearthquakes.overview
+package com.earthquakesaroundme.overview
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
@@ -14,10 +13,9 @@ import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.californiaearthquakes.R
-import com.californiaearthquakes.databinding.FragmentOverviewBinding
-import com.californiaearthquakes.search_options.SearchOptions
-import kotlinx.android.synthetic.main.fragment_overview.view.*
+import com.earthquakesaroundme.R
+import com.earthquakesaroundme.databinding.FragmentOverviewBinding
+import com.earthquakesaroundme.search_options.SearchOptions
 
 class OverviewFragment: Fragment() {
 
@@ -115,14 +113,23 @@ class OverviewFragment: Fragment() {
         return binding.root
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        inflater?.inflate(R.menu.menu_overflow, menu)
+//    }
+//
+//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+//        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController())
+//                || super.onOptionsItemSelected(item)
+//    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.menu_overflow, menu)
+        inflater.inflate(R.menu.menu_overflow, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController())
-                || super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item, view!!.findNavController())
+                ||super.onOptionsItemSelected(item)
     }
-
 }

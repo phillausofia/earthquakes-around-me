@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/overviewFragment"
-        android:name="com.californiaearthquakes.overview.OverviewFragment"
+        android:name="com.earthquakesaroundme.overview.OverviewFragment"
         android:label="OverviewFragment"
         tools:layout="@layout/fragment_overview" >
         <argument
             android:name="searchOptions"
-            app:argType="com.californiaearthquakes.search_options.SearchOptions" />
+            app:argType="com.earthquakesaroundme.search_options.SearchOptions" />
         <action
             android:id="@+id/actionShowEarthquakeDetails"
             app:destination="@id/detailFragment" />
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/searchOptionsFragment"
-        android:name="com.californiaearthquakes.search_options.SearchOptionsFragment"
+        android:name="com.earthquakesaroundme.search_options.SearchOptionsFragment"
         android:label="SearchOptionsFragment"
         tools:layout="@layout/fragment_search_options" >
         <action
@@ -31,9 +31,9 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.californiaearthquakes.detail.DetailFragment"
+        android:name="com.earthquakesaroundme.detail.DetailFragment"
         android:label="DetailFragment" >
         <argument android:name="earthquake"
-            app:argType="com.californiaearthquakes.network.Model$Earthquake" />
+            app:argType="com.earthquakesaroundme.network.Model$Earthquake" />
     </fragment>
 </navigation>

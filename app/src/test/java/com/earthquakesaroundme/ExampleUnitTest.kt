@@ -1,4 +1,4 @@
-package com.californiaearthquakes
+package com.earthquakesaroundme
 
 import org.junit.Test
 

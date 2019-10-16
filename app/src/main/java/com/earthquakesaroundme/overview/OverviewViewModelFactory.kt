@@ -1,8 +1,8 @@
-package com.californiaearthquakes.overview
+package com.earthquakesaroundme.overview
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.californiaearthquakes.search_options.SearchOptions
+import com.earthquakesaroundme.search_options.SearchOptions
 import java.lang.IllegalArgumentException
 
 class OverviewViewModelFactory(

@@ -7,13 +7,13 @@
 
         <variable
             name="viewModel"
-            type="com.californiaearthquakes.overview.OverviewViewModel" />
+            type="com.earthquakesaroundme.overview.OverviewViewModel" />
     </data>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context="com.californiaearthquakes.overview.OverviewFragment">
+            tools:context="com.earthquakesaroundme.overview.OverviewFragment">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/earthquakes_list"

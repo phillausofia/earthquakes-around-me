@@ -12,7 +12,7 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
     defaultConfig {
-        applicationId "com.californiaearthquakes"
+        applicationId "com.earthquakesaroundme"
         minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
@@ -37,6 +37,7 @@ android {
 
 dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
@@ -77,4 +78,5 @@ dependencies {
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }

@@ -1,4 +1,4 @@
-package com.californiaearthquakes.search_options
+package com.earthquakesaroundme.search_options
 
 object SearchOptionsUtils {
 

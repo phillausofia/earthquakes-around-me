@@ -7,7 +7,7 @@
 
         <variable
             name="earthquake"
-            type="com.californiaearthquakes.network.Model.Earthquake" />
+            type="com.earthquakesaroundme.network.Model.Earthquake" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

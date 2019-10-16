@@ -1,4 +1,4 @@
-package com.californiaearthquakes.network
+package com.earthquakesaroundme.network
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

@@ -1,16 +1,13 @@
-package com.californiaearthquakes.overview
+package com.earthquakesaroundme.overview
 
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.californiaearthquakes.databinding.ListItemViewBinding
-import com.californiaearthquakes.network.Model
-import com.californiaearthquakes.network.Model.Earthquake
-import kotlinx.android.synthetic.main.fragment_overview.view.*
+import com.earthquakesaroundme.databinding.ListItemViewBinding
+import com.earthquakesaroundme.network.Model.Earthquake
 
 class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EarthquakeViewHolder {

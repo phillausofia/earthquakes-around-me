@@ -1,8 +1,8 @@
-package com.californiaearthquakes.detail
+package com.earthquakesaroundme.detail
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.californiaearthquakes.network.Model
+import com.earthquakesaroundme.network.Model
 import java.lang.IllegalArgumentException
 
 class DetailViewModelFactory(
