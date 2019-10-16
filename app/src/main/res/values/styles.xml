@@ -15,4 +15,12 @@
         <item name="android:textSize">@dimen/options_fragment_category_text_size</item>
     </style>
 
+    <style name="earthquake_details_text_view">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingBottom">@dimen/layout_padding</item>
+        <item name="android:textAlignment">viewStart</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
 </resources>

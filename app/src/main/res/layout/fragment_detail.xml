@@ -21,21 +21,31 @@
 
             <TextView
                 android:id="@+id/place_text_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingBottom="@dimen/layout_padding"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="16dp"
+                style="@style/earthquake_details_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="1km SW of London, UK" />
 
             <TextView
                 android:id="@+id/mag_text_view"
+                style="@style/earthquake_details_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.displayEarthquakeMag}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/place_text_view"
-                tools:text="4.9"/>
+                tools:text="4.9" />
+
+            <TextView
+                android:id="@+id/textView"
+                style="@style/earthquake_details_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.displayEarthquakeTime}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mag_text_view"
+                tools:text="October 20, 2019"/>
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

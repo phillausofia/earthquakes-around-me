@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.californiaearthquakes.network.Model.Earthquake
+import java.text.SimpleDateFormat
+import java.util.*
 
 class DetailViewModel(earthquake: Earthquake) : ViewModel() {
 
@@ -15,6 +17,10 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
 
     val displayEarthquakeMag = Transformations.map(selectedEarthquake) {
         it.mag.toString()
+    }
+
+    val displayEarthquakeTime = Transformations.map(selectedEarthquake) {
+        SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss").format(Date(it.time))
     }
 
     init {
