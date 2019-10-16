@@ -21,7 +21,9 @@ object Model {
     data class Earthquake(
         val mag: Double,
         val place: String,
-        val time: Long
+        val time: Long,
+        val magType: String,
+        val title: String
     ): Parcelable {
         val intensity = when (mag) {
             in -10.0..1.99 -> EarthquakeIntensity.NOT_EVEN_AN_EARTHQUAKE

@@ -26,8 +26,6 @@ class DetailFragment : Fragment() {
         binding.viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(DetailViewModel::class.java)
 
-        binding.placeTextView.text = earthquake.place
-
         return binding.root
 
     }
