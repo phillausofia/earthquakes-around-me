@@ -24,6 +24,10 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
             .format(Date(it.properties.time))
     }
 
+    val displayEarthquakeDepth = Transformations.map(selectedEarthquake) {
+        "${it.geometry.coordinates[2]} km"
+    }
+
     init {
         _selectedEarthquake.value = earthquake
     }
