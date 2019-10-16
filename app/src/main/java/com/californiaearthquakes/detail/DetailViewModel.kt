@@ -16,11 +16,12 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
 
 
     val displayEarthquakeMag = Transformations.map(selectedEarthquake) {
-        it.mag.toString()
+        it.properties.mag.toString()
     }
 
     val displayEarthquakeTime = Transformations.map(selectedEarthquake) {
-        SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z").format(Date(it.time))
+        SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z")
+            .format(Date(it.properties.time))
     }
 
     init {

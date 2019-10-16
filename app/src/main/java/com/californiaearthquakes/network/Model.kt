@@ -11,14 +11,16 @@ enum class EarthquakeIntensity{
 object Model {
 
     data class Result(
-        val features: List<Feature>
+        val features: List<Earthquake>
         )
 
-    data class Feature(
-        val properties: Earthquake
-    )
     @Parcelize
     data class Earthquake(
+        val properties: Properties,
+        val geometry: Geometry
+    ) : Parcelable
+    @Parcelize
+    data class Properties(
         val mag: Double,
         val place: String,
         val time: Long,
@@ -31,5 +33,10 @@ object Model {
             in 4.0..5.99 -> EarthquakeIntensity.MED
             else -> EarthquakeIntensity.HIGH
         }
+
     }
+    @Parcelize
+    data class Geometry(
+        val coordinates: List<Double>
+    ) : Parcelable
 }

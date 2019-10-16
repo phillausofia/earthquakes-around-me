@@ -25,14 +25,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="@{viewModel.selectedEarthquake.title}"
+                android:text="@{viewModel.selectedEarthquake.properties.title}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Big title" />
 
             <TextView
                 android:id="@+id/place_text_view"
-                android:text="@{viewModel.selectedEarthquake.place}"
+                android:text="@{viewModel.selectedEarthquake.properties.place}"
                 style="@style/earthquake_details_text_view"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_text_view"
@@ -63,7 +63,7 @@
                 style="@style/earthquake_details_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{viewModel.selectedEarthquake.magType}"
+                android:text="@{viewModel.selectedEarthquake.properties.magType}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/time_text_view"
                 tools:text="ml"/>

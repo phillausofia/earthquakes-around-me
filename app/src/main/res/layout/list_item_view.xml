@@ -17,7 +17,7 @@
         android:paddingTop="@dimen/layout_half_padding"
         android:paddingEnd="@dimen/layout_padding"
         android:paddingBottom="@dimen/layout_half_padding"
-        app:setBackground="@{earthquake.intensity}">
+        app:setBackground="@{earthquake.properties.intensity}">
 
 
         <TextView
@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toStartOf="@+id/mag"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:place="@{earthquake.place}"
+            app:place="@{earthquake.properties.place}"
             tools:text="7km NW of The Geysers, CA" />
 
         <TextView
@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toStartOf="@+id/mag"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/place"
-            app:time="@{earthquake.time}"
+            app:time="@{earthquake.properties.time}"
             tools:text="Monday, 17th of July, 2019" />
 
 
@@ -56,7 +56,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/time"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/place"
-            app:mag="@{earthquake.mag}"
+            app:mag="@{earthquake.properties.mag}"
             tools:text="4.3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

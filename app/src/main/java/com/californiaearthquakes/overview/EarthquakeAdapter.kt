@@ -50,7 +50,7 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Eart
         }
 
         override fun areContentsTheSame(oldItem: Earthquake, newItem: Earthquake): Boolean {
-            return oldItem.time == newItem.time
+            return oldItem.properties.time == newItem.properties.time
         }
 
     }

@@ -68,7 +68,7 @@ class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
                     resultsLimit, startTime, endTime)
             try {
                 val result = getEarthquakesDeferred.await()
-                _earthquakes.value = result.features.map { it.properties }
+                _earthquakes.value = result.features
                 _isLoadingMoreResults.value = false
 
             } catch (e: Exception) {
