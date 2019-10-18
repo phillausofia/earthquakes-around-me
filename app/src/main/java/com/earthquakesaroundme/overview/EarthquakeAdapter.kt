@@ -24,18 +24,24 @@ private val ITEM_VIEW_TYPE_PROGRESS_ITEM = 0
 class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<DataItem, RecyclerView.ViewHolder>(DiffCallback()) {
 
     private val adapterScope = CoroutineScope(Dispatchers.Default)
+    private var items: MutableList<DataItem>? = null
 
-    fun addProgressAndSubmitList(list: List<Earthquake>?) {
+    fun addDataAndSubmitList(list: List<Earthquake>?) {
         adapterScope.launch {
-            val items= when (list) {
-                null -> listOf(DataItem.ProgressItem)
-                else -> list.map {DataItem.EarthquakeItem(it)} + listOf(DataItem.ProgressItem)
+            items = when (list) {
+                null -> null
+                else -> list.map {DataItem.EarthquakeItem(it)}.toMutableList()
             }
             withContext(Dispatchers.Main) {
                 submitList(items)
             }
         }
 
+    }
+
+    fun insertProgressView() {
+        items!!.add(DataItem.ProgressItem)
+        notifyItemInserted(items!!.size)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
