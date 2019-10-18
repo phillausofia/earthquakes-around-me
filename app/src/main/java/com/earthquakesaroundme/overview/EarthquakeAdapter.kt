@@ -9,6 +9,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.databinding.ListItemViewBinding
 import com.earthquakesaroundme.network.Model.Earthquake
 
+
+private val ITEM_VIEW_TYPE_EARTHQUAKE_ITEM = 1
+private val ITEM_VIEW_TYPE_PROGRESS_ITEM = 0
+
 class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EarthquakeViewHolder {
 
@@ -56,5 +60,17 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Eart
         fun onClick(earthquake: Earthquake) = clickListener(earthquake)
     }
 
+}
 
+sealed class DataItem {
+
+    data class EarthquakeItem(val earthquake: Earthquake) : DataItem() {
+        override val id = earthquake.properties.time
+    }
+
+    object ProgressItem : DataItem() {
+        override val id = Long.MIN_VALUE
+    }
+
+    abstract val id: Long
 }
