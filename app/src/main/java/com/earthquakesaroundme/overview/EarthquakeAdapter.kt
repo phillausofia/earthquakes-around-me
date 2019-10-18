@@ -2,29 +2,73 @@ package com.earthquakesaroundme.overview
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.earthquakesaroundme.R
 import com.earthquakesaroundme.databinding.ListItemViewBinding
 import com.earthquakesaroundme.network.Model.Earthquake
+import kotlinx.android.synthetic.main.progress_item.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.lang.ClassCastException
 
 
 private val ITEM_VIEW_TYPE_EARTHQUAKE_ITEM = 1
 private val ITEM_VIEW_TYPE_PROGRESS_ITEM = 0
 
-class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Earthquake, EarthquakeAdapter.EarthquakeViewHolder>(DiffCallback) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EarthquakeViewHolder {
+class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<DataItem, RecyclerView.ViewHolder>(DiffCallback()) {
 
-        return EarthquakeViewHolder.from(parent)
+    private val adapterScope = CoroutineScope(Dispatchers.Default)
+
+    fun addProgressAndSubmitList(list: List<Earthquake>?) {
+        adapterScope.launch {
+            val items= when (list) {
+                null -> listOf(DataItem.ProgressItem)
+                else -> list.map {DataItem.EarthquakeItem(it)} + listOf(DataItem.ProgressItem)
+            }
+            withContext(Dispatchers.Main) {
+                submitList(items)
+            }
+        }
+
     }
 
-    override fun onBindViewHolder(holder: EarthquakeViewHolder, position: Int) {
-        val earthquake = getItem(position)
-        holder.itemView.setOnClickListener {
-            onClickListener.onClick(earthquake)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        return when(viewType) {
+            ITEM_VIEW_TYPE_EARTHQUAKE_ITEM -> EarthquakeViewHolder.from(parent)
+            ITEM_VIEW_TYPE_PROGRESS_ITEM -> ProgressViewHolder.from(parent)
+            else -> throw ClassCastException("Unknown viewType ${viewType}")
         }
-        holder.bin(earthquake)
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when (holder) {
+            is EarthquakeViewHolder -> {
+                val earthquakeItem = getItem(position) as DataItem.EarthquakeItem
+                holder.itemView.setOnClickListener {
+                    onClickListener.onClick(earthquakeItem.earthquake)
+                }
+                holder.bin(earthquakeItem.earthquake)
+            }
+        }
+//        val earthquake = getItem(position)
+//        holder.itemView.setOnClickListener {
+//            onClickListener.onClick(earthquake)
+//        }
+//        holder.bin(earthquake)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return when (getItem(position)) {
+            is DataItem.EarthquakeItem -> ITEM_VIEW_TYPE_EARTHQUAKE_ITEM
+            is DataItem.ProgressItem -> ITEM_VIEW_TYPE_PROGRESS_ITEM
+        }
     }
 
     class EarthquakeViewHolder(private val binding: ListItemViewBinding): RecyclerView.ViewHolder(binding.root) {
@@ -44,14 +88,26 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Eart
         }
     }
 
+    class ProgressViewHolder(view: View): RecyclerView.ViewHolder(view) {
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Earthquake>() {
-        override fun areItemsTheSame(oldItem: Earthquake, newItem: Earthquake): Boolean {
-            return oldItem == newItem
+        companion object {
+
+            fun from(parent: ViewGroup) : ProgressViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.progress_item, parent, false)
+                return ProgressViewHolder(view)
+            }
+        }
+    }
+
+
+    class DiffCallback : DiffUtil.ItemCallback<DataItem>() {
+        override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Earthquake, newItem: Earthquake): Boolean {
-            return oldItem.properties.time == newItem.properties.time
+        override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
+            return oldItem.id == newItem.id
         }
 
     }

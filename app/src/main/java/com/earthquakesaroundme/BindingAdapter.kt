@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.network.EarthquakeIntensity
 import com.earthquakesaroundme.network.Model.Earthquake
+import com.earthquakesaroundme.overview.DataItem
 import com.earthquakesaroundme.overview.EarthquakeAdapter
 import java.text.SimpleDateFormat
 import java.util.*
@@ -13,7 +14,7 @@ import java.util.*
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Earthquake>?) {
     val adapter = recyclerView.adapter as EarthquakeAdapter
-    adapter.submitList(data)
+    adapter.addProgressAndSubmitList(data)
 }
 
 @BindingAdapter("place")
