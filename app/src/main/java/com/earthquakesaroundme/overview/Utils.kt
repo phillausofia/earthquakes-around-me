@@ -9,6 +9,8 @@ import com.google.android.gms.location.LocationServices
 
 object Utils {
 
+    var userLocation: Location? = null
+
     object FINAL_CONSTANTS {
 
         val RESULTS_FORMAT = "geojson"
@@ -23,7 +25,7 @@ object Utils {
     }
 
     object FusedLocationProvider {
-        private var fusedLocationProviderClient: FusedLocationProviderClient?= null
+        private var fusedLocationProviderClient: FusedLocationProviderClient? = null
         private var location : MutableLiveData<Location> = MutableLiveData()
 
         fun getInstance(appContext : Context) : FusedLocationProviderClient {

@@ -4,7 +4,6 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -25,12 +24,13 @@ class OverviewFragment: Fragment() {
 
 
     private var searchOptions: SearchOptions? = null
-    private var radiusCenterPointLocation: Location? = null
     private val job = Job()
     private val coroutineScope = CoroutineScope(Dispatchers.Main + job)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
+
+        val application = requireNotNull(activity).application
 
         val binding: FragmentOverviewBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview, container, false)
 
@@ -41,14 +41,15 @@ class OverviewFragment: Fragment() {
         } catch (e: Exception) {
         }
 
-        if (radiusCenterPointLocation == null ) {
-            coroutineScope.launch {
-                radiusCenterPointLocation =
-                    async{ getCurrentLocation()}.await()
-            }
-        }
+//        if (radiusCenterPointLocation == null ) {
+//            coroutineScope.launch {
+//                radiusCenterPointLocation =
+//                    async{ getCurrentLocation()}.await()
+//            }
+//        }
+
         Log.i("onCreateView", "We got location")
-        val viewModelFactory = OverviewViewModelFactory(searchOptions, radiusCenterPointLocation)
+        val viewModelFactory = OverviewViewModelFactory(searchOptions, application)
 
         val viewModel = ViewModelProviders.of(this,
             viewModelFactory).get(OverviewViewModel::class.java)
@@ -72,6 +73,7 @@ class OverviewFragment: Fragment() {
             list ->
             if (list.isNotEmpty()) {
                 binding.mainProgressBar.visibility = View.GONE
+                binding.earthquakesList.visibility = View.VISIBLE
             } else {
                 binding.apply {
                     earthquakesList.visibility = View.GONE
@@ -145,8 +147,6 @@ class OverviewFragment: Fragment() {
             return@withContext task.result
         }
     }
-
-
 
 
 }

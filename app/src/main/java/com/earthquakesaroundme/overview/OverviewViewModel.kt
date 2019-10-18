@@ -1,5 +1,6 @@
 package com.earthquakesaroundme.overview
 
+import android.app.Application
 import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -11,11 +12,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.earthquakesaroundme.search_options.SearchOptions
+import com.google.android.gms.location.LocationServices
 import java.util.*
 
 
 class OverviewViewModel(searchOptions: SearchOptions?,
-                         location: Location?) : ViewModel() {
+                         application: Application) : ViewModel() {
 
     private val _earthquakes = MutableLiveData<List<Earthquake>>()
     val earthquakes : LiveData<List<Earthquake>>
@@ -60,12 +62,20 @@ class OverviewViewModel(searchOptions: SearchOptions?,
             searchOptions.startTime?.let { startTime = it}
             searchOptions.endTime?.let { endTime = it}
         }
-
-        if (location != null) {
-            latitude = location.latitude
-            longitude = location.longitude
+        if (Utils.userLocation == null) {
+            val fusedLocationProviderClient = LocationServices
+                .getFusedLocationProviderClient(application)
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+                Utils.userLocation = it
+                latitude = Utils.userLocation!!.latitude
+                longitude = Utils.userLocation!!.longitude
+                getLatestEarthquakes()
+            }
+        } else {
+            getLatestEarthquakes()
         }
-        getLatestEarthquakes()
+
+
     }
     private fun getLatestEarthquakes() {
         coroutineScope.launch {
