@@ -79,5 +79,9 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:$version_recyclerview"
 
+    // Google Maps (needed in order to add a MapView
     implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+    //Needed in order to get the users location
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
 }

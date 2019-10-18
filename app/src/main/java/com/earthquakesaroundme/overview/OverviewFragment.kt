@@ -1,6 +1,8 @@
 package com.earthquakesaroundme.overview
 
+import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.view.updatePadding
 import androidx.databinding.DataBindingUtil
@@ -11,16 +13,21 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.R
 import com.earthquakesaroundme.databinding.FragmentOverviewBinding
 import com.earthquakesaroundme.search_options.SearchOptions
+import com.google.android.gms.location.LocationServices
+import kotlinx.coroutines.*
 
 class OverviewFragment: Fragment() {
 
 
     private var searchOptions: SearchOptions? = null
+    private var radiusCenterPointLocation: Location? = null
+    private val job = Job()
+    private val coroutineScope = CoroutineScope(Dispatchers.Main + job)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -34,7 +41,14 @@ class OverviewFragment: Fragment() {
         } catch (e: Exception) {
         }
 
-        val viewModelFactory = OverviewViewModelFactory(searchOptions)
+        if (radiusCenterPointLocation == null ) {
+            coroutineScope.launch {
+                radiusCenterPointLocation =
+                    async{ getCurrentLocation()}.await()
+            }
+        }
+        Log.i("onCreateView", "We got location")
+        val viewModelFactory = OverviewViewModelFactory(searchOptions, radiusCenterPointLocation)
 
         val viewModel = ViewModelProviders.of(this,
             viewModelFactory).get(OverviewViewModel::class.java)
@@ -108,20 +122,13 @@ class OverviewFragment: Fragment() {
             }
         })
 
+
         setHasOptionsMenu(true)
+
+
 
         return binding.root
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-//        super.onCreateOptionsMenu(menu, inflater)
-//        inflater?.inflate(R.menu.menu_overflow, menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-//        return NavigationUI.onNavDestinationSelected(item!!, view!!.findNavController())
-//                || super.onOptionsItemSelected(item)
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -132,4 +139,21 @@ class OverviewFragment: Fragment() {
         return NavigationUI.onNavDestinationSelected(item, view!!.findNavController())
                 ||super.onOptionsItemSelected(item)
     }
+
+
+    suspend fun getCurrentLocation(): Location? {
+        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context!!)
+        return withContext(Dispatchers.Main) {
+            val task = fusedLocationProviderClient.lastLocation
+            while (!task.isSuccessful) {
+                delay(1000)
+            }
+            Log.i("return location", "${task.result!!.latitude}")
+            return@withContext task.result
+        }
+    }
+
+
+
+
 }

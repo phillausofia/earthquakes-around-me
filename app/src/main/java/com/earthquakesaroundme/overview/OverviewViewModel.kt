@@ -1,5 +1,6 @@
 package com.earthquakesaroundme.overview
 
+import android.location.Location
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,9 +11,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import com.earthquakesaroundme.search_options.SearchOptions
+import java.util.*
 
 
-class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
+class OverviewViewModel(searchOptions: SearchOptions?,
+                         location: Location?) : ViewModel() {
 
     private val _earthquakes = MutableLiveData<List<Earthquake>>()
     val earthquakes : LiveData<List<Earthquake>>
@@ -40,6 +43,10 @@ class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
 
     private var maxRadiusKm = Utils.INITIAL_VALUES.MAX_RADIUS_KM
 
+    private var latitude = Utils.FINAL_CONSTANTS.LATITUDE
+
+    private var longitude = Utils.FINAL_CONSTANTS.LONGITUDE
+
     private val viewModelJob = Job()
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
@@ -53,14 +60,19 @@ class OverviewViewModel(searchOptions: SearchOptions?) : ViewModel() {
             searchOptions.startTime?.let { startTime = it}
             searchOptions.endTime?.let { endTime = it}
         }
+
+        if (location != null) {
+            latitude = location.latitude
+            longitude = location.longitude
+        }
         getLatestEarthquakes()
     }
     private fun getLatestEarthquakes() {
         coroutineScope.launch {
             val getEarthquakesDeferred =
                 UsgsApi.usgsApiService.getEarthquakes(Utils.FINAL_CONSTANTS.RESULTS_FORMAT,
-                    Utils.FINAL_CONSTANTS.LATITUDE,
-                    Utils.FINAL_CONSTANTS.LONGITUDE,
+                    latitude,
+                    longitude,
                     maxRadiusKm,
                     minMagnitude,
                     maxMagnitude,
