@@ -83,7 +83,7 @@ class OverviewFragment: Fragment() {
             else {
                 binding.apply {
                     mainProgressBar.visibility = View.GONE
-                    emptyView.text = "We couldn't find your location"
+                    emptyView.text = "We couldn't find your location."
                     emptyView.visibility = View.VISIBLE
                 }
             }

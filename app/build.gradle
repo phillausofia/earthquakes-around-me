@@ -18,6 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -84,4 +85,10 @@ dependencies {
 
     //Needed in order to get the users location
     implementation 'com.google.android.gms:play-services-location:17.0.0'
+
+    //Ads
+    implementation 'com.google.android.gms:play-services-ads:18.2.0'
+
+    //There are too many methods, so we need to implement Multidex
+    implementation 'com.android.support:multidex:1.0.3'
 }

@@ -1,6 +1,7 @@
 package com.earthquakesaroundme.search_options
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,17 +13,30 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import com.earthquakesaroundme.R
 import com.earthquakesaroundme.databinding.FragmentSearchOptionsBinding
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.InterstitialAd
 import java.text.SimpleDateFormat
 import java.util.*
 
 
 class SearchOptionsFragment: Fragment() {
 
+    private lateinit var interstitialAd: InterstitialAd
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-
+        interstitialAd = InterstitialAd(context!!)
+        interstitialAd.adUnitId = "ca-app-pub-3940256099942544/1033173712"
+        if (!interstitialAd.isLoaded) {
+            interstitialAd.loadAd(AdRequest.Builder().build())
+        }
+        interstitialAd.adListener = object : AdListener() {
+            override fun onAdClosed() {
+                interstitialAd.loadAd(AdRequest.Builder().build())
+            }
+        }
         val binding = DataBindingUtil.inflate<FragmentSearchOptionsBinding>(inflater,
             R.layout.fragment_search_options, container, false)
 
@@ -48,6 +62,11 @@ class SearchOptionsFragment: Fragment() {
             if (inputDataIsCorrect(searchOptions.maxRadiusKm,
                     searchOptions.startTime,
                     searchOptions.endTime)) {
+                if (interstitialAd.isLoaded) {
+                    interstitialAd.show()
+                } else {
+                    Log.d("onCreateView", "Ad was not loaded.")
+                }
                 view.findNavController()
                     .navigate(
                         SearchOptionsFragmentDirections
