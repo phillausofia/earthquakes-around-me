@@ -1,9 +1,12 @@
 package com.earthquakesaroundme.overview
 
-import android.location.Location
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,44 +20,48 @@ import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.R
 import com.earthquakesaroundme.databinding.FragmentOverviewBinding
 import com.earthquakesaroundme.search_options.SearchOptions
-import com.google.android.gms.location.LocationServices
-import kotlinx.coroutines.*
 
 class OverviewFragment: Fragment() {
 
-
+    private val MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 666
     private var searchOptions: SearchOptions? = null
-    private val job = Job()
-    private val coroutineScope = CoroutineScope(Dispatchers.Main + job)
+    private lateinit var binding: FragmentOverviewBinding
+    private lateinit var viewModel: OverviewViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
 
         val application = requireNotNull(activity).application
 
-        val binding: FragmentOverviewBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_overview, container, false)
 
         binding.lifecycleOwner = this
 
         try {
             searchOptions = OverviewFragmentArgs.fromBundle(arguments!!).searchOptions
         } catch (e: Exception) {
+
         }
 
-//        if (radiusCenterPointLocation == null ) {
-//            coroutineScope.launch {
-//                radiusCenterPointLocation =
-//                    async{ getCurrentLocation()}.await()
-//            }
-//        }
 
-        Log.i("onCreateView", "We got location")
         val viewModelFactory = OverviewViewModelFactory(searchOptions, application)
 
-        val viewModel = ViewModelProviders.of(this,
+        viewModel = ViewModelProviders.of(this,
             viewModelFactory).get(OverviewViewModel::class.java)
 
         binding.viewModel = viewModel
+
+        //Checking if we have permission to access user's location
+        if (ContextCompat.checkSelfPermission(this.context!!, Manifest.permission.ACCESS_COARSE_LOCATION)
+            != PackageManager.PERMISSION_GRANTED) {
+            //Request the permission
+            requestPermissions(arrayOf(
+                Manifest.permission
+                    .ACCESS_COARSE_LOCATION), MY_PERMISSIONS_REQUEST_COARSE_LOCATION)
+        } else {
+            viewModel.getUserLocation()
+        }
+
 
         val adapter = EarthquakeAdapter(EarthquakeAdapter.OnClickListener {
             viewModel.displayEarthquakeDetails(it)
@@ -67,6 +74,20 @@ class OverviewFragment: Fragment() {
         //Add dividers to list
         binding.earthquakesList.addItemDecoration(DividerItemDecoration(this.context,
             DividerItemDecoration.VERTICAL))
+
+        //If we have the user's location then we can get the list of earthquakes
+        viewModel.foundUserLocation.observe(this, Observer { isLocationFound ->
+            if (isLocationFound) {
+                viewModel.getLatestEarthquakes()
+            }
+            else {
+                binding.apply {
+                    mainProgressBar.visibility = View.GONE
+                    emptyView.text = "We couldn't find your location"
+                    emptyView.visibility = View.VISIBLE
+                }
+            }
+        })
 
         //When we retrieve a list of earthquakes, the progress bar is disabled
         viewModel.earthquakes.observe(this, Observer {
@@ -92,7 +113,6 @@ class OverviewFragment: Fragment() {
         })
 
         binding.earthquakesList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
@@ -111,18 +131,18 @@ class OverviewFragment: Fragment() {
 
         viewModel.earthquakeToNavigateTo.observe(this, Observer {
             if (it != null) {
-
                 this.findNavController().navigate(OverviewFragmentDirections.actionShowEarthquakeDetails(it))
-                viewModel.displayEartquakeDetailsCompleted()
+                viewModel.displayEarthquakeDetailsCompleted()
             }
         })
 
 
+
+
         setHasOptionsMenu(true)
 
-
-
         return binding.root
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -136,17 +156,25 @@ class OverviewFragment: Fragment() {
     }
 
 
-    suspend fun getCurrentLocation(): Location? {
-        val fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context!!)
-        return withContext(Dispatchers.Main) {
-            val task = fusedLocationProviderClient.lastLocation
-            while (!task.isSuccessful) {
-                delay(1000)
+    override fun onRequestPermissionsResult(requestCode: Int,
+                                            permissions: Array<out String>,
+                                            grantResults: IntArray) {
+        Log.i("onRequestPermResult", "request code: ${requestCode}")
+        when (requestCode) {
+            MY_PERMISSIONS_REQUEST_COARSE_LOCATION -> {
+                if ((grantResults.isNotEmpty() && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED)) {
+                    viewModel.getUserLocation()
+                } else {
+                    binding.mainProgressBar.visibility = View.GONE
+                    binding.emptyView.apply {
+                        text = "Permission denied. We need your location to show the earthquakes."
+                        visibility = View.VISIBLE
+                    }
+                }
+                return
             }
-            Log.i("return location", "${task.result!!.latitude}")
-            return@withContext task.result
+            else -> {}
         }
     }
-
-
 }

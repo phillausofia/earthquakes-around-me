@@ -1,7 +1,11 @@
 package com.earthquakesaroundme.overview
 
+import android.Manifest
 import android.app.Application
+import android.content.pm.PackageManager
 import android.location.Location
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,10 +18,11 @@ import kotlinx.coroutines.launch
 import com.earthquakesaroundme.search_options.SearchOptions
 import com.google.android.gms.location.LocationServices
 import java.util.*
+import kotlin.properties.Delegates
 
 
-class OverviewViewModel(searchOptions: SearchOptions?,
-                         application: Application) : ViewModel() {
+class OverviewViewModel(private val searchOptions: SearchOptions?,
+                         private val application: Application) : ViewModel() {
 
     private val _earthquakes = MutableLiveData<List<Earthquake>>()
     val earthquakes : LiveData<List<Earthquake>>
@@ -30,6 +35,11 @@ class OverviewViewModel(searchOptions: SearchOptions?,
     private val _earthquakeToNavigateTo = MutableLiveData<Earthquake>()
     val earthquakeToNavigateTo : LiveData<Earthquake>
         get() = _earthquakeToNavigateTo
+
+    private val _foundUserLocation = MutableLiveData<Boolean>()
+    val foundUserLocation : LiveData<Boolean>
+        get() = _foundUserLocation
+
 
     private var resultsLimit = Utils.INITIAL_VALUES.RESULS_LIMIT
 
@@ -53,31 +63,10 @@ class OverviewViewModel(searchOptions: SearchOptions?,
 
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-    init {
-        if (searchOptions != null) {
-            minMagnitude = searchOptions.minMagnitude
-            maxMagnitude = searchOptions.maxMagnitude
-            searchOptions.orderBy?.let { orderBy = it }
-            searchOptions.maxRadiusKm?.let { maxRadiusKm = it}
-            searchOptions.startTime?.let { startTime = it}
-            searchOptions.endTime?.let { endTime = it}
-        }
-        if (Utils.userLocation == null) {
-            val fusedLocationProviderClient = LocationServices
-                .getFusedLocationProviderClient(application)
-            fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-                Utils.userLocation = it
-                latitude = Utils.userLocation!!.latitude
-                longitude = Utils.userLocation!!.longitude
-                getLatestEarthquakes()
-            }
-        } else {
-            getLatestEarthquakes()
-        }
 
 
-    }
-    private fun getLatestEarthquakes() {
+    fun getLatestEarthquakes() {
+        checkSearchOptions()
         coroutineScope.launch {
             val getEarthquakesDeferred =
                 UsgsApi.usgsApiService.getEarthquakes(Utils.FINAL_CONSTANTS.RESULTS_FORMAT,
@@ -118,7 +107,40 @@ class OverviewViewModel(searchOptions: SearchOptions?,
         _earthquakeToNavigateTo.value = earthquakeToNavigateTo
     }
 
-    fun displayEartquakeDetailsCompleted() {
+    fun displayEarthquakeDetailsCompleted() {
         _earthquakeToNavigateTo.value = null
     }
+
+    fun getUserLocation() {
+        if (Utils.userLocation == null) {
+            val fusedLocationProviderClient = LocationServices
+                .getFusedLocationProviderClient(application)
+            fusedLocationProviderClient.lastLocation.addOnSuccessListener {
+                Utils.userLocation = it
+                latitude = Utils.userLocation!!.latitude
+                longitude = Utils.userLocation!!.longitude
+                _foundUserLocation.value = true
+            }
+                .addOnFailureListener {
+                    _foundUserLocation.value = false
+                }
+        } else {
+            latitude = Utils.userLocation!!.latitude
+            longitude = Utils.userLocation!!.longitude
+            _foundUserLocation.value = true
+        }
+    }
+
+    private fun checkSearchOptions() {
+        if (searchOptions != null) {
+            minMagnitude = searchOptions.minMagnitude
+            maxMagnitude = searchOptions.maxMagnitude
+            searchOptions.orderBy?.let { orderBy = it }
+            searchOptions.maxRadiusKm?.let { maxRadiusKm = it}
+            searchOptions.startTime?.let { startTime = it}
+            searchOptions.endTime?.let { endTime = it}
+        }
+    }
+
+
 }
