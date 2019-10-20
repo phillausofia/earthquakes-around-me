@@ -14,6 +14,8 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
     val selectedEarthquake : LiveData<Earthquake>
         get() = _selectedEarthquake
 
+    val adSize = DetailUtils.adSize
+
 
     val displayEarthquakeMag = Transformations.map(selectedEarthquake) {
         it.properties.mag.toString()
@@ -32,9 +34,12 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
 
     init {
         _selectedEarthquake.value = earthquake
+
     }
 
     fun getEarthquakeCoordinates() =
         Pair(_selectedEarthquake.value!!.geometry.coordinates[1],
             _selectedEarthquake.value!!.geometry.coordinates[0])
+
+    fun getAdContainerHeight() = "${adSize!!.height}dp"
 }

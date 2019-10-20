@@ -18,7 +18,9 @@
     <style name="earthquake_details_text_view">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:paddingBottom">@dimen/layout_padding</item>
+        <item name="android:paddingTop">@dimen/layout_padding</item>
+        <item name="android:paddingStart">@dimen/layout_padding</item>
+        <item name="android:paddingEnd">@dimen/layout_padding</item>
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textSize">18sp</item>
     </style>

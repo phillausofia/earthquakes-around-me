@@ -1,14 +1,22 @@
 package com.earthquakesaroundme.detail
 
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.earthquakesaroundme.R
 import com.earthquakesaroundme.databinding.FragmentDetailBinding
+import com.earthquakesaroundme.detail.DetailUtils.adSize
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
@@ -21,6 +29,8 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var viewModel: DetailViewModel
     private lateinit var mapView: MapView
+    private lateinit var adView: AdView
+
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -30,9 +40,17 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
+
         val binding = DataBindingUtil.inflate<FragmentDetailBinding>(inflater,
             R.layout.fragment_detail, container, false)
         binding.lifecycleOwner = this
+
+        adView = AdView(context!!)
+        adSize?.let {
+            binding.linearLayoutAd.addView(adView)
+            Log.i("onCreateView", "loading the Banner")
+            loadBanner()
+        }
 
         val earthquake = DetailFragmentArgs.fromBundle(arguments!!).earthquake
 
@@ -59,6 +77,28 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
         p0!!.addMarker(MarkerOptions().position(LatLng(lat, lng)).title(viewModel.
             selectedEarthquake.value!!.properties.place))
         p0.moveCamera(CameraUpdateFactory.newLatLng(LatLng(lat, lng)))
+    }
+
+    private fun loadBanner() {
+        adView.adUnitId = AD_UNIT_ID
+
+        adView.adSize = adSize
+
+        // Create an ad request. Check your logcat output for the hashed device ID to
+        // get test ads on a physical device, e.g.,
+        // "Use AdRequest.Builder.addTestDevice("ABCDE0123") to get test ads on this device."
+        val adRequest = AdRequest
+            .Builder()
+            .addTestDevice("5D768934B1FE279BA20FDDAAE2951F1F").build()
+
+        // Start loading the ad in the background.
+        adView.loadAd(adRequest)
+        adView.visibility = View.VISIBLE
+    }
+
+    companion object {
+        // This is an ad unit ID for a test ad. Replace with your own banner ad unit ID.
+        private val AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111"
     }
 
     override fun onResume() {

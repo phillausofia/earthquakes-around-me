@@ -1,14 +1,25 @@
 package com.earthquakesaroundme
 
+import android.util.DisplayMetrics
+import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.earthquakesaroundme.detail.DetailUtils
 import com.earthquakesaroundme.network.EarthquakeIntensity
 import com.earthquakesaroundme.network.Model.Earthquake
 import com.earthquakesaroundme.overview.EarthquakeAdapter
 import java.text.SimpleDateFormat
 import java.util.*
+
+
+@BindingAdapter("layout_height")
+fun setLayoutHeight(view: View, height: Int) {
+    val layoutParams = view.layoutParams
+    layoutParams.height = (height * DetailUtils.density!!).toInt()
+    view.layoutParams = layoutParams
+}
 
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<Earthquake>?) {
