@@ -9,7 +9,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.R
 import com.earthquakesaroundme.databinding.ListItemViewBinding
+import com.earthquakesaroundme.detail.DetailUtils
 import com.earthquakesaroundme.network.Model.Earthquake
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import kotlinx.android.synthetic.main.ad_item.view.*
 import kotlinx.android.synthetic.main.progress_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -30,7 +34,15 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
         adapterScope.launch {
             items = when (list) {
                 null -> null
-                else -> list.map {DataItem.EarthquakeItem(it)}.toMutableList()
+                else -> {
+                    val earthquakes: MutableList<DataItem> = list.map {DataItem.EarthquakeItem(it)}.toMutableList()
+                        var adPositionInList = 3
+                        while (adPositionInList <= earthquakes.size) {
+                            earthquakes.add(adPositionInList, DataItem.AdItem(adPositionInList))
+                            adPositionInList += 10
+                        }
+                    earthquakes
+                }
             }
             withContext(Dispatchers.Main) {
                 submitList(items)
@@ -49,6 +61,7 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
         return when(viewType) {
             ITEM_VIEW_TYPE_EARTHQUAKE_ITEM -> EarthquakeViewHolder.from(parent)
             ITEM_VIEW_TYPE_PROGRESS_ITEM -> ProgressViewHolder.from(parent)
+            ITEM_VIEW_TYPE_AD_ITEM -> AdViewHolder.from(parent)
             else -> throw ClassCastException("Unknown viewType ${viewType}")
         }
     }
@@ -63,17 +76,13 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
                 holder.bin(earthquakeItem.earthquake)
             }
         }
-//        val earthquake = getItem(position)
-//        holder.itemView.setOnClickListener {
-//            onClickListener.onClick(earthquake)
-//        }
-//        holder.bin(earthquake)
     }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is DataItem.EarthquakeItem -> ITEM_VIEW_TYPE_EARTHQUAKE_ITEM
             is DataItem.ProgressItem -> ITEM_VIEW_TYPE_PROGRESS_ITEM
+            is DataItem.AdItem -> ITEM_VIEW_TYPE_AD_ITEM
         }
     }
 
@@ -106,6 +115,28 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
         }
     }
 
+    class AdViewHolder(view: View): RecyclerView.ViewHolder(view) {
+
+        companion object {
+
+            fun from(parent: ViewGroup): AdViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val view = layoutInflater.inflate(R.layout.ad_item, parent, false)
+
+                val adView = AdView(parent.context)
+                view.linear_layout_ad_item.addView(adView)
+                adView.adUnitId = "ca-app-pub-3940256099942544/6300978111"
+                adView.adSize = DetailUtils.adSize
+                val adRequest = AdRequest
+                    .Builder()
+                    .addTestDevice("5D768934B1FE279BA20FDDAAE2951F1F").build()
+                adView.loadAd(adRequest)
+
+                return AdViewHolder(view)
+            }
+        }
+    }
+
 
     class DiffCallback : DiffUtil.ItemCallback<DataItem>() {
         override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
@@ -130,9 +161,14 @@ sealed class DataItem {
         override val id = earthquake.properties.time
     }
 
+    data class AdItem(val positionInList: Int) : DataItem() {
+        override val id = positionInList.toLong()
+    }
+
     object ProgressItem : DataItem() {
         override val id = Long.MIN_VALUE
     }
+
 
     abstract val id: Long
 }

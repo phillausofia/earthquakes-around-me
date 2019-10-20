@@ -4,15 +4,18 @@
         <variable
             name="utils"
             type="com.earthquakesaroundme.detail.DetailUtils" />
+        <variable
+            name="detailViewModel"
+            type="com.earthquakesaroundme.detail.DetailViewModel" />
     </data>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:id="@+id/linear_layout_ad_item"
-    android:layout_width="0dp"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:layout_height="@{utils.adSize.height}">
+    app:layout_height="@{detailViewModel.adSize.height}">
 
 </LinearLayout>
 </layout>
