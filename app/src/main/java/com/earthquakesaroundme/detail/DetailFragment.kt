@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
@@ -46,11 +47,21 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
         binding.lifecycleOwner = this
 
         adView = AdView(context!!)
-        adSize?.let {
-            binding.linearLayoutAd.addView(adView)
-            Log.i("onCreateView", "loading the Banner")
-            loadBanner()
+
+        if (binding.linearLayoutAd.isEmpty()) {
+            adSize?.let {
+                binding.linearLayoutAd.addView(adView)
+                Log.i("onCreateView", "loading the Banner")
+                loadBanner()
+                loadAd()
+            }
+            adView.adListener = object: AdListener() {
+                override fun onAdClosed() {
+                    loadAd()
+                }
+            }
         }
+
 
         val earthquake = DetailFragmentArgs.fromBundle(arguments!!).earthquake
 
@@ -83,7 +94,11 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
         adView.adUnitId = AD_UNIT_ID
 
         adView.adSize = adSize
+        adView.visibility = View.VISIBLE
 
+    }
+
+    private fun loadAd() {
         // Create an ad request. Check your logcat output for the hashed device ID to
         // get test ads on a physical device, e.g.,
         // "Use AdRequest.Builder.addTestDevice("ABCDE0123") to get test ads on this device."
@@ -93,7 +108,6 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
 
         // Start loading the ad in the background.
         adView.loadAd(adRequest)
-        adView.visibility = View.VISIBLE
     }
 
     companion object {

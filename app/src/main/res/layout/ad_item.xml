@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="utils"
+            type="com.earthquakesaroundme.detail.DetailUtils" />
+    </data>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/linear_layout_ad_item"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    app:layout_height="@{utils.adSize.height}">
+
+</LinearLayout>
+</layout>

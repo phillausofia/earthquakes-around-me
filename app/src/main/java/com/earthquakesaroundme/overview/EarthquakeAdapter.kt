@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.lang.ClassCastException
 
-
+private val ITEM_VIEW_TYPE_AD_ITEM = 2
 private val ITEM_VIEW_TYPE_EARTHQUAKE_ITEM = 1
 private val ITEM_VIEW_TYPE_PROGRESS_ITEM = 0
 

@@ -41,5 +41,4 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
         Pair(_selectedEarthquake.value!!.geometry.coordinates[1],
             _selectedEarthquake.value!!.geometry.coordinates[0])
 
-    fun getAdContainerHeight() = "${adSize!!.height}dp"
 }
