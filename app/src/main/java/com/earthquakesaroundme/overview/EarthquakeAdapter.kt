@@ -30,6 +30,7 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
     private val adapterScope = CoroutineScope(Dispatchers.Default)
     private var items: MutableList<DataItem>? = null
 
+
     fun addDataAndSubmitList(list: List<Earthquake>?) {
         adapterScope.launch {
             items = when (list) {
@@ -140,7 +141,7 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
 
     class DiffCallback : DiffUtil.ItemCallback<DataItem>() {
         override fun areItemsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
         override fun areContentsTheSame(oldItem: DataItem, newItem: DataItem): Boolean {

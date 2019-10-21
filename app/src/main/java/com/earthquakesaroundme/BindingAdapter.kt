@@ -39,8 +39,8 @@ fun TextView.bindTime(time: Long) {
 }
 
 @BindingAdapter("mag")
-fun TextView.bindMag(mag: Double) {
-    text = mag.toString()
+fun TextView.bindMag(mag: Double?) {
+    text = mag?.toString()
 }
 
 @BindingAdapter("setBackground")

@@ -94,10 +94,12 @@ class OverviewFragment: Fragment() {
                 binding.mainProgressBar.visibility = View.GONE
                 binding.earthquakesList.visibility = View.VISIBLE
             } else {
-                binding.apply {
-                    earthquakesList.visibility = View.GONE
-                    emptyView.visibility = View.VISIBLE
-                    mainProgressBar.visibility = View.GONE
+                if (adapter.itemCount == 0) {
+                    binding.apply {
+                        earthquakesList.visibility = View.GONE
+                        emptyView.visibility = View.VISIBLE
+                        mainProgressBar.visibility = View.GONE
+                    }
                 }
             }
         })
