@@ -25,5 +25,6 @@
     <string name="end_date_after_start_date">End date should be after start date.</string>
     <string name="magnitude_details_fragment">Magnitude: %s</string>
     <string name="depth_details_fragment">Depth: %s</string>
+    <string name="simple_date_format_overview">yyyy-MM-dd HH:mm:ss z</string>
 
 </resources>

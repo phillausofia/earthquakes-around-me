@@ -4,7 +4,6 @@ package com.earthquakesaroundme
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.detail.DetailUtils
@@ -35,7 +34,8 @@ fun TextView.bindPlace(place: String) {
 
 @BindingAdapter("time")
 fun TextView.bindTime(time: Long) {
-    text = SimpleDateFormat("yyyy-MM-dd h:mm:ss a", Locale.US)
+    text = SimpleDateFormat(resources.getString(R.string.simple_date_format_overview),
+        Locale.getDefault())
         .format(Date(time))
 }
 

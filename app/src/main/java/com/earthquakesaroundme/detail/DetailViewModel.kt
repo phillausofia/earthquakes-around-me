@@ -22,7 +22,7 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
     }
 
     val displayEarthquakeTime = Transformations.map(selectedEarthquake) {
-        SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z")
+        SimpleDateFormat("EEE, d MMM yyyy HH:mm:ss z", Locale.getDefault())
             .format(Date(it.properties.time))
     }
 
