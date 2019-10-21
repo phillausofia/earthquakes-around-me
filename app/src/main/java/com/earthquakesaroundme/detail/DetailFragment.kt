@@ -1,12 +1,10 @@
 package com.earthquakesaroundme.detail
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.core.view.isEmpty
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -16,7 +14,6 @@ import com.earthquakesaroundme.databinding.FragmentDetailBinding
 import com.earthquakesaroundme.detail.DetailUtils.adSize
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -24,7 +21,6 @@ import com.google.android.gms.maps.MapView
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment : Fragment(), OnMapReadyCallback {
 
@@ -112,7 +108,7 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
 
     companion object {
         // This is an ad unit ID for a test ad. Replace with your own banner ad unit ID.
-        private val AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111"
+        private const val AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111"
     }
 
     override fun onResume() {

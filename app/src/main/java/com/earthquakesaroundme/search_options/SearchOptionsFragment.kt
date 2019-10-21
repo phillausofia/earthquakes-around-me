@@ -124,20 +124,20 @@ class SearchOptionsFragment: Fragment() {
     private fun inputDataIsCorrect(maxRadiusKm: Int?, startTime: String?, endTime: String?): Boolean {
         if (maxRadiusKm != null) {
             if (maxRadiusKm !in 0..20_000) {
-                Toast.makeText(this.context, "Radius should be between 0 and 20 000.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, getString(R.string.radius_incorrect), Toast.LENGTH_SHORT).show()
                 return false
             }
         }
         if (startTime != null) {
             if (!isDateCorrect(startTime)) {
-                Toast.makeText(this.context, "Start date invalid. Examples of correct dates: 2000-01-01, 2018-12-31.",
+                Toast.makeText(this.context, getString(R.string.date_invalid, "Start"),
                     Toast.LENGTH_SHORT).show()
                 return false
             }
         }
         if (endTime != null) {
             if (!isDateCorrect(endTime)) {
-                Toast.makeText(this.context, "End date invalid. Examples of correct dates: 2000-01-01, 2018-12-31.",
+                Toast.makeText(this.context, getString(R.string.date_invalid, "End"),
                     Toast.LENGTH_SHORT).show()
                 return false
             }
@@ -145,7 +145,7 @@ class SearchOptionsFragment: Fragment() {
             val startDate = if (startTime != null) toDate(startTime) else
                 Date(Date().time - 30L * 24 * 3600 * 1000)
             if (!endDate.after(startDate)) {
-                Toast.makeText(this.context, "End date should be after start date.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this.context, getString(R.string.end_date_after_start_date), Toast.LENGTH_SHORT).show()
                 return false
             }
         }

@@ -3,9 +3,7 @@ package com.earthquakesaroundme.overview
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -83,7 +81,7 @@ class OverviewFragment: Fragment() {
             else {
                 binding.apply {
                     mainProgressBar.visibility = View.GONE
-                    emptyView.text = "We couldn't find your location."
+                    emptyView.text = getString(R.string.location_not_found)
                     emptyView.visibility = View.VISIBLE
                 }
             }
@@ -159,7 +157,6 @@ class OverviewFragment: Fragment() {
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<out String>,
                                             grantResults: IntArray) {
-        Log.i("onRequestPermResult", "request code: ${requestCode}")
         when (requestCode) {
             MY_PERMISSIONS_REQUEST_COARSE_LOCATION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] ==
@@ -168,7 +165,7 @@ class OverviewFragment: Fragment() {
                 } else {
                     binding.mainProgressBar.visibility = View.GONE
                     binding.emptyView.apply {
-                        text = "Permission denied. We need your location to show the earthquakes."
+                        text = context.getString(R.string.permission_denied)
                         visibility = View.VISIBLE
                     }
                 }
