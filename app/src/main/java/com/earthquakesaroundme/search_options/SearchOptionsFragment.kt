@@ -62,11 +62,11 @@ class SearchOptionsFragment: Fragment() {
             if (inputDataIsCorrect(searchOptions.maxRadiusKm,
                     searchOptions.startTime,
                     searchOptions.endTime)) {
-                if (interstitialAd.isLoaded) {
-                    interstitialAd.show()
-                } else {
-                    Log.d("onCreateView", "Ad was not loaded.")
-                }
+//                if (interstitialAd.isLoaded) {
+//                    interstitialAd.show()
+//                } else {
+//                    Log.d("onCreateView", "Ad was not loaded.")
+//                }
                 view.findNavController()
                     .navigate(
                         SearchOptionsFragmentDirections

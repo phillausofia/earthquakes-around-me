@@ -18,7 +18,7 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
 
 
     val displayEarthquakeMag = Transformations.map(selectedEarthquake) {
-        it.properties.mag.toString()
+        it.properties.mag?.toString() ?: "Unspecified"
     }
 
     val displayEarthquakeTime = Transformations.map(selectedEarthquake) {

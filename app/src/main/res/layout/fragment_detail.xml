@@ -48,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:paddingTop="@dimen/layout_margin"
                     android:text="@{viewModel.selectedEarthquake.properties.title}"
+                    android:textColor="@android:color/black"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -76,9 +77,9 @@
                     style="@style/earthquake_details_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{viewModel.displayEarthquakeMag}"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/mag_type_text_view"
+                    app:layout_constraintTop_toBottomOf="@+id/time_text_view"
+                    app:detailsMag="@{viewModel.displayEarthquakeMag}"
                     tools:text="4.9" />
 
                 <TextView
@@ -87,8 +88,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{viewModel.selectedEarthquake.properties.magType}"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/time_text_view"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@+id/depth_text_view"
+                    app:layout_constraintStart_toEndOf="@+id/mag_text_view"
+                    app:layout_constraintTop_toTopOf="@+id/mag_text_view"
                     tools:text="ml" />
 
                 <TextView
@@ -97,9 +100,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/layout_padding"
-                    android:text="@{viewModel.displayEarthquakeDepth}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mag_text_view"
+                    app:detailsDepth="@{viewModel.displayEarthquakeDepth}"
                     tools:text="4.5" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 

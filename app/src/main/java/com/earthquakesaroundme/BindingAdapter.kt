@@ -1,9 +1,10 @@
 package com.earthquakesaroundme
 
-import android.util.DisplayMetrics
+
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.TypedArrayUtils.getString
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.detail.DetailUtils
@@ -53,4 +54,14 @@ fun ConstraintLayout.setBackgroundDependingOnIntensity(intensity: EarthquakeInte
             else -> resources.getColor(R.color.color_high_earthquake)
         })
     }
+}
+
+@BindingAdapter("detailsMag")
+fun TextView.bindDetailsMag(mag: String) {
+    text = resources.getString(R.string.magnitude_details_fragment, mag)
+}
+
+@BindingAdapter("detailsDepth")
+fun TextView.bindDetailsDepth(depth: String) {
+    text = resources.getString(R.string.depth_details_fragment, depth)
 }
