@@ -2,9 +2,6 @@
 <layout>
     <data>
         <variable
-            name="utils"
-            type="com.earthquakesaroundme.detail.DetailUtils" />
-        <variable
             name="detailViewModel"
             type="com.earthquakesaroundme.detail.DetailViewModel" />
     </data>

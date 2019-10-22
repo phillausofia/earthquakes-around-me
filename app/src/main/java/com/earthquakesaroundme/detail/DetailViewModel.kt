@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import com.earthquakesaroundme.Utils
 import com.earthquakesaroundme.network.Model.Earthquake
 import java.text.SimpleDateFormat
 import java.util.*
@@ -14,7 +15,7 @@ class DetailViewModel(earthquake: Earthquake) : ViewModel() {
     val selectedEarthquake : LiveData<Earthquake>
         get() = _selectedEarthquake
 
-    val adSize = DetailUtils.adSize
+    val adSize = Utils.adSize
 
 
     val displayEarthquakeMag = Transformations.map(selectedEarthquake) {

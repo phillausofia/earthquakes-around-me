@@ -7,9 +7,6 @@
         <variable
             name="viewModel"
             type="com.earthquakesaroundme.detail.DetailViewModel" />
-        <variable
-            name="utils"
-            type="com.earthquakesaroundme.detail.DetailUtils" />
     </data>
 
 

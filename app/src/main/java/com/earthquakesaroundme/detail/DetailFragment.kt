@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.earthquakesaroundme.R
 import com.earthquakesaroundme.Utils
 import com.earthquakesaroundme.databinding.FragmentDetailBinding
-import com.earthquakesaroundme.detail.DetailUtils.adSize
+import com.earthquakesaroundme.Utils.adSize
 import com.google.android.gms.ads.AdListener
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView

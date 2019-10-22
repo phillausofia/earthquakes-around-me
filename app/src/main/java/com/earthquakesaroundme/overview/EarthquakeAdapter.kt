@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.R
 import com.earthquakesaroundme.Utils
 import com.earthquakesaroundme.databinding.ListItemViewBinding
-import com.earthquakesaroundme.detail.DetailUtils
 import com.earthquakesaroundme.network.Model.Earthquake
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import kotlinx.android.synthetic.main.ad_item.view.*
-import kotlinx.android.synthetic.main.progress_item.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -41,7 +39,7 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
                         var adPositionInList = if (earthquakes.size >= 3) 3 else earthquakes.size
                         while (adPositionInList <= earthquakes.size) {
                             earthquakes.add(adPositionInList, DataItem.AdItem(adPositionInList))
-                            adPositionInList += 10
+                            adPositionInList += 11
                         }
                     earthquakes
                 }
@@ -128,7 +126,7 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
                 val adView = AdView(parent.context)
                 view.linear_layout_ad_item.addView(adView)
                 adView.adUnitId = Utils.ADAPTIVE_BANNER_AD_UNIT_ID
-                adView.adSize = DetailUtils.adSize
+                adView.adSize = Utils.adSize
                 val adRequest = AdRequest
                     .Builder()
                     .addTestDevice("5D768934B1FE279BA20FDDAAE2951F1F").build()

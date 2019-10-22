@@ -1,18 +1,11 @@
 package com.earthquakesaroundme
 
 
-import android.Manifest
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.DisplayMetrics
-import android.widget.LinearLayout
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import com.earthquakesaroundme.detail.DetailUtils
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.MobileAds
-import kotlinx.android.synthetic.main.fragment_detail.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,7 +17,7 @@ class MainActivity : AppCompatActivity() {
             display.getMetrics(outMetrics)
 
             val density = outMetrics.density
-            DetailUtils.density = density
+            Utils.densityDpi = density
 
 
             var adWidthPixels = 0f
@@ -41,6 +34,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         MobileAds.initialize(this)
-        DetailUtils.adSize = adSize
+        Utils.adSize = adSize
     }
 }
