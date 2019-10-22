@@ -25,9 +25,7 @@
         tools:layout="@layout/fragment_search_options" >
         <action
             android:id="@+id/action_searchOptionsFragment_to_overviewFragment"
-            app:destination="@id/overviewFragment"
-            app:popUpTo="@+id/overviewFragment" >
-        </action>
+            app:destination="@id/overviewFragment"></action>
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
