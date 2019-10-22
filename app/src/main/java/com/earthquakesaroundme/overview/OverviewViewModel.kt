@@ -1,11 +1,6 @@
 package com.earthquakesaroundme.overview
 
-import android.Manifest
 import android.app.Application
-import android.content.pm.PackageManager
-import android.location.Location
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,7 +13,6 @@ import kotlinx.coroutines.launch
 import com.earthquakesaroundme.search_options.SearchOptions
 import com.google.android.gms.location.LocationServices
 import java.util.*
-import kotlin.properties.Delegates
 
 
 class OverviewViewModel(private val searchOptions: SearchOptions?,
@@ -41,7 +35,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
         get() = _foundUserLocation
 
 
-    private var resultsLimit = Utils.INITIAL_VALUES.RESULS_LIMIT
+    private var resultsLimit = OverviewUtils.INITIAL_VALUES.RESULS_LIMIT
 
     private var minMagnitude: Int? = null
 
@@ -51,13 +45,13 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
 
     private var endTime: String? = null
 
-    private var orderBy: String = Utils.INITIAL_VALUES.ORDER_BY
+    private var orderBy: String = OverviewUtils.INITIAL_VALUES.ORDER_BY
 
-    private var maxRadiusKm = Utils.INITIAL_VALUES.MAX_RADIUS_KM
+    private var maxRadiusKm = OverviewUtils.INITIAL_VALUES.MAX_RADIUS_KM
 
-    private var latitude = Utils.FINAL_CONSTANTS.LATITUDE
+    private var latitude = OverviewUtils.FINAL_CONSTANTS.LATITUDE
 
-    private var longitude = Utils.FINAL_CONSTANTS.LONGITUDE
+    private var longitude = OverviewUtils.FINAL_CONSTANTS.LONGITUDE
 
     private val viewModelJob = Job()
 
@@ -69,7 +63,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
         checkSearchOptions()
         coroutineScope.launch {
             val getEarthquakesDeferred =
-                UsgsApi.usgsApiService.getEarthquakes(Utils.FINAL_CONSTANTS.RESULTS_FORMAT,
+                UsgsApi.usgsApiService.getEarthquakes(OverviewUtils.FINAL_CONSTANTS.RESULTS_FORMAT,
                     latitude,
                     longitude,
                     maxRadiusKm,
@@ -112,21 +106,21 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
     }
 
     fun getUserLocation() {
-        if (Utils.userLocation == null) {
+        if (OverviewUtils.userLocation == null) {
             val fusedLocationProviderClient = LocationServices
                 .getFusedLocationProviderClient(application)
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-                Utils.userLocation = it
-                latitude = Utils.userLocation!!.latitude
-                longitude = Utils.userLocation!!.longitude
+                OverviewUtils.userLocation = it
+                latitude = OverviewUtils.userLocation!!.latitude
+                longitude = OverviewUtils.userLocation!!.longitude
                 _foundUserLocation.value = true
             }
                 .addOnFailureListener {
                     _foundUserLocation.value = false
                 }
         } else {
-            latitude = Utils.userLocation!!.latitude
-            longitude = Utils.userLocation!!.longitude
+            latitude = OverviewUtils.userLocation!!.latitude
+            longitude = OverviewUtils.userLocation!!.longitude
             _foundUserLocation.value = true
         }
     }

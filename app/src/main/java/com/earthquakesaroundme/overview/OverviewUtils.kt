@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
-object Utils {
+object OverviewUtils {
 
     var userLocation: Location? = null
 

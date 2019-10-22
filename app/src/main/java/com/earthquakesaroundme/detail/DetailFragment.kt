@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.earthquakesaroundme.R
+import com.earthquakesaroundme.Utils
 import com.earthquakesaroundme.databinding.FragmentDetailBinding
 import com.earthquakesaroundme.detail.DetailUtils.adSize
 import com.google.android.gms.ads.AdListener
@@ -87,7 +88,7 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun loadBanner() {
-        adView.adUnitId = AD_UNIT_ID
+        adView.adUnitId = Utils.ADAPTIVE_BANNER_AD_UNIT_ID
 
         adView.adSize = adSize
         adView.visibility = View.VISIBLE
@@ -106,10 +107,6 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
         adView.loadAd(adRequest)
     }
 
-    companion object {
-        // This is an ad unit ID for a test ad. Replace with your own banner ad unit ID.
-        private const val AD_UNIT_ID = "ca-app-pub-3940256099942544/6300978111"
-    }
 
     override fun onResume() {
         super.onResume()

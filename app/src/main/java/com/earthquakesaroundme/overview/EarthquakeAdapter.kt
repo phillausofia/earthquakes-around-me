@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.earthquakesaroundme.R
+import com.earthquakesaroundme.Utils
 import com.earthquakesaroundme.databinding.ListItemViewBinding
 import com.earthquakesaroundme.detail.DetailUtils
 import com.earthquakesaroundme.network.Model.Earthquake
@@ -37,7 +38,7 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
                 null -> null
                 else -> {
                     val earthquakes: MutableList<DataItem> = list.map {DataItem.EarthquakeItem(it)}.toMutableList()
-                        var adPositionInList = 3
+                        var adPositionInList = if (earthquakes.size >= 3) 3 else earthquakes.size
                         while (adPositionInList <= earthquakes.size) {
                             earthquakes.add(adPositionInList, DataItem.AdItem(adPositionInList))
                             adPositionInList += 10
@@ -126,7 +127,7 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
 
                 val adView = AdView(parent.context)
                 view.linear_layout_ad_item.addView(adView)
-                adView.adUnitId = "ca-app-pub-3940256099942544/6300978111"
+                adView.adUnitId = Utils.ADAPTIVE_BANNER_AD_UNIT_ID
                 adView.adSize = DetailUtils.adSize
                 val adRequest = AdRequest
                     .Builder()
