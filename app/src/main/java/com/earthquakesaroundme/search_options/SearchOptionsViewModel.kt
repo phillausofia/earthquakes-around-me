@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SearchOptionsViewModel(application: Application): ViewModel() {
+class SearchOptionsViewModel(): ViewModel() {
 
     private val _isCheckBoxMinMagChecked = MutableLiveData<Boolean>()
     val isCheckBoxMinMagChecked: LiveData<Boolean>

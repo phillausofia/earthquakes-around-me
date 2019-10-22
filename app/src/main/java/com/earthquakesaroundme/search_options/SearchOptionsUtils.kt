@@ -10,7 +10,6 @@ object SearchOptionsUtils {
 
     object UsgsApiOrderByValues {
 
-        val TIME = "time"
         val TIME_ASC = "time-asc"
         val MAG = "magnitude"
         val MAG_ASC = "magnitude-asc"

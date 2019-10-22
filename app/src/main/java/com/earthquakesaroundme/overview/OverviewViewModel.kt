@@ -126,13 +126,13 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
     }
 
     private fun checkSearchOptions() {
-        if (searchOptions != null) {
-            minMagnitude = searchOptions.minMagnitude
-            maxMagnitude = searchOptions.maxMagnitude
-            searchOptions.orderBy?.let { orderBy = it }
-            searchOptions.maxRadiusKm?.let { maxRadiusKm = it}
-            searchOptions.startTime?.let { startTime = it}
-            searchOptions.endTime?.let { endTime = it}
+        searchOptions?.let { searchOp ->
+            searchOp.minMagnitude?.let { minMagnitude = it}
+            searchOp.maxMagnitude?.let { maxMagnitude = it}
+            searchOp.orderBy?.let { orderBy = it }
+            searchOp.maxRadiusKm?.let { maxRadiusKm = it}
+            searchOp.startTime?.let { startTime = it}
+            searchOp.endTime?.let { endTime = it}
         }
     }
 

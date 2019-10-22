@@ -29,7 +29,9 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
     private val adapterScope = CoroutineScope(Dispatchers.Default)
     private var items: MutableList<DataItem>? = null
 
-
+    /*
+    This function get a list of Earthquake items and inserts Ad items among them
+     */
     fun addDataAndSubmitList(list: List<Earthquake>?) {
         adapterScope.launch {
             items = when (list) {

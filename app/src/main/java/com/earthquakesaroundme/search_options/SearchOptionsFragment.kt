@@ -30,14 +30,12 @@ class SearchOptionsFragment: Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val application = requireNotNull(activity).application
-
 //        initInterstitialAd()
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_options,
             container, false)
 
-        val viewModelFactory = SearchOptionsViewModelFactory(application)
+        val viewModelFactory = SearchOptionsViewModelFactory()
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(SearchOptionsViewModel::class.java)
