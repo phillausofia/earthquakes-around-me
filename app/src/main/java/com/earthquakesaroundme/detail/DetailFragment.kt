@@ -3,6 +3,7 @@ package com.earthquakesaroundme.detail
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isEmpty
@@ -26,7 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class DetailFragment : Fragment(), OnMapReadyCallback {
 
     private lateinit var viewModel: DetailViewModel
-    private lateinit var mapView: MapView
+    private lateinit var mapView: CustomMapView
     private lateinit var adView: AdView
 
 
@@ -74,7 +75,6 @@ class DetailFragment : Fragment(), OnMapReadyCallback {
         mapView.onCreate(savedInstanceState)
 
         mapView.getMapAsync(this)
-
 
         return binding.root
 

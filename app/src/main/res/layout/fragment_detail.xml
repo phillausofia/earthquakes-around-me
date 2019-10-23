@@ -11,6 +11,7 @@
 
 
     <ScrollView
+        android:id="@+id/scroll_view_detail_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -74,9 +75,9 @@
                     style="@style/earthquake_details_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    app:detailsMag="@{viewModel.displayEarthquakeMag}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/time_text_view"
-                    app:detailsMag="@{viewModel.displayEarthquakeMag}"
                     tools:text="4.9" />
 
                 <TextView
@@ -97,9 +98,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/layout_padding"
+                    app:detailsDepth="@{viewModel.displayEarthquakeDepth}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/mag_text_view"
-                    app:detailsDepth="@{viewModel.displayEarthquakeDepth}"
                     tools:text="4.5" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -110,7 +111,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
                 tools:layout_editor_absoluteX="16dp">
 
-                <com.google.android.gms.maps.MapView
+                <com.earthquakesaroundme.detail.CustomMapView
                     android:id="@+id/earthquake_location_map_view"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
