@@ -34,4 +34,8 @@
         <argument android:name="earthquake"
             app:argType="com.earthquakesaroundme.network.Model$Earthquake" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.earthquakesaroundme.about.AboutFragment"
+        android:label="AboutFragment" />
 </navigation>

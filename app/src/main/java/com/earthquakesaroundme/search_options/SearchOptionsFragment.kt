@@ -19,6 +19,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.InterstitialAd
 import java.text.SimpleDateFormat
 import java.util.*
+import androidx.lifecycle.Observer
 
 
 class SearchOptionsFragment: Fragment() {
@@ -34,15 +35,19 @@ class SearchOptionsFragment: Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_options,
             container, false)
+        binding.lifecycleOwner = this
 
         val viewModelFactory = SearchOptionsViewModelFactory()
 
         viewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(SearchOptionsViewModel::class.java)
 
-        showInputFields()
 
         initNumberPickers()
+
+        showInputFields()
+
+        initAboutTextView()
 
         binding.buttonSearch.setOnClickListener { view ->
             val searchOptions = getSearchOptions(binding)
@@ -62,6 +67,22 @@ class SearchOptionsFragment: Fragment() {
 
 
         return binding.root
+    }
+
+    private fun initAboutTextView() {
+        binding.aboutOptionsFragment.maxLines = 7
+        binding.textViewReadMore.setOnClickListener {
+            viewModel.setExpandDescriptionText(viewModel.expandDescriptionText.value!!.not())
+        }
+        viewModel.expandDescriptionText.observe(this, Observer { shouldExpand ->
+            if (shouldExpand) {
+                binding.aboutOptionsFragment.maxLines = 100
+                binding.textViewReadMore.text = getString(R.string.search_options_read_less)
+            } else {
+                binding.aboutOptionsFragment.maxLines = 7
+                binding.textViewReadMore.text = getString(R.string.search_options_read_more)
+            }
+        })
     }
 
     private fun initNumberPickers() {

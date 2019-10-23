@@ -17,18 +17,36 @@
                 android:id="@+id/about_options_fragment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:lineSpacingMultiplier="1.25"
                 android:padding="@dimen/layout_padding"
                 android:text="@string/about_options_fragment"
+                android:textAlignment="viewStart"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_read_more"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/layout_padding"
+                android:text="@string/search_options_read_more"
+                android:textAlignment="center"
+                android:textColor="@color/colorAccent"
+                android:textSize="20sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/about_options_fragment" />
 
             <TextView
                 android:id="@+id/min_mag_text_view"
                 style="@style/search_options_category"
                 android:text="@string/minimum_magnitude"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/about_options_fragment" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_read_more" />
 
             <NumberPicker
                 android:id="@+id/number_picker_min_magnitude"

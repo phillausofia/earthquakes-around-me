@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">Earthquakes around Me</string>
     <string name="load_more">Load more</string>
-    <string name="about_options_fragment">Here you can modify different parameters of the displayed earthquakes. Like minimum magnitude of maximum magnitude of the earthquakes.</string>
+    <string name="about_options_fragment">Here you can modify different parameters of the displayed earthquakes. Like minimum magnitude or maximum magnitude of the earthquakes.
+    \n\nPlease keep in mind the default values of the parameters and restrictions. Default values:\n
+    - start date: current date and time minus 30 days\n
+    - end date: current date and time\n
+    - order by: time in descending order\n
+    - radius: 500 km\n
+    \nSo if you don\'t change anything, you\'ll see the last earthquakes that happened in the past
+        30 days in a 500 km radius, ordered from the latest to the earliest.\n\n
+        PS: Did you know that there are earthquakes with a negative magnitude? Set the maximum
+        magnitude to zero and the radius to 20 000 and see what happens.</string>
     <string name="minimum_magnitude">Minimum magnitude</string>
     <string name="search">Search</string>
     <string name="search_options">Search Options</string>
@@ -26,5 +35,21 @@
     <string name="magnitude_details_fragment">Magnitude: %s</string>
     <string name="depth_details_fragment">Depth: %s</string>
     <string name="simple_date_format_overview">yyyy-MM-dd HH:mm:ss z</string>
+    <string name="search_options_read_more">Read more</string>
+    <string name="search_options_read_less">Read less</string>
+    <string name="app_description">This app uses information provided by the United States
+        Geological Survey (USGS). Which means that, unfortunately, you won\'t be able to see
+    all the small earthquakes that happen around the world, each day. As a rule, only the
+    stronger earthquakes that happen outside the USA will be shown in the app. Nonetheless,
+    the USGS database also holds information regarding earthquakes that happened decades or
+    centuries ago.
+        \n\n
+        To use the app, you must allow it to access your location. That\'s the whole point of it,
+    right? To see the earthquakes that happen in a radius starting from the user\'s location.
+    \n\n
+        This app is not officially endorsed by USGS and the developer is not responsible for
+    the accuracy of the data. Also, this app doesn\'t send alerts when an earthquake has
+    happened. Nor does it predict them - which is impossible, by the way :).</string>
+    <string name="about">About</string>
 
 </resources>

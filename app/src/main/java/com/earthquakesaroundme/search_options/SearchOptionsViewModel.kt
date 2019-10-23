@@ -1,6 +1,5 @@
 package com.earthquakesaroundme.search_options
 
-import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -38,6 +37,12 @@ class SearchOptionsViewModel(): ViewModel() {
     private val _maxMag = MutableLiveData<Int?>()
     val maxMag: LiveData<Int?>
         get() = _maxMag
+
+    private val _expandDescriptionText = MutableLiveData<Boolean>(false)
+    val expandDescriptionText: LiveData<Boolean>
+        get() = _expandDescriptionText
+
+    val setExpandDescriptionText = { value: Boolean -> _expandDescriptionText.value = value}
 
     val setMinMag = { value: Int? -> _minMag.value = value}
 
