@@ -1,6 +1,7 @@
 package com.earthquakesaroundme.overview
 
 import android.app.Application
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -34,6 +35,27 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
     val foundUserLocation : LiveData<Boolean>
         get() = _foundUserLocation
 
+    private val _getLastEarthquakesExceptionMessage = MutableLiveData<String>()
+    val getLastEarthquakesException: LiveData<String>
+        get() = _getLastEarthquakesExceptionMessage
+
+    private val _itemScrollPosition = MutableLiveData<Int>()
+    val itemScrollPosition: LiveData<Int>
+        get() = _itemScrollPosition
+
+    val setItemScrollPosition = { value: Int -> _itemScrollPosition.value = value }
+
+    private val _scrollOffset = MutableLiveData<Int>()
+    val scrollOffset: LiveData<Int>
+        get() = _scrollOffset
+
+    val setScrollOffset = { value: Int -> _scrollOffset.value = value}
+
+    private val _recyclerViewState = MutableLiveData<Parcelable?>()
+    val recyclerViewState: LiveData<Parcelable?>
+        get() = _recyclerViewState
+
+    val setRecyclerView = {value: Parcelable? -> _recyclerViewState.value = value}
 
     private var resultsLimit = OverviewUtils.INITIAL_VALUES.RESULS_LIMIT
 
@@ -77,6 +99,7 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
                 _isLoadingMoreResults.value = false
 
             } catch (e: Exception) {
+                _getLastEarthquakesExceptionMessage.value = e.message
                 _earthquakes.value = ArrayList()
             }
         }

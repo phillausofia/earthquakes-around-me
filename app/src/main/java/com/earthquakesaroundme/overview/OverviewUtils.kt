@@ -11,6 +11,9 @@ object OverviewUtils {
 
     var userLocation: Location? = null
 
+    const val MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 666
+    const val BUNDLE_RECYCLER_LAYOUT: String = "OverviewFragment.recycler.layout"
+
     object FINAL_CONSTANTS {
 
         val RESULTS_FORMAT = "geojson"

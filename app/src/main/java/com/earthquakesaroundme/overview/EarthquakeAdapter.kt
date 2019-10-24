@@ -54,8 +54,10 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
     }
 
     fun insertProgressView() {
-        items!!.add(DataItem.ProgressItem)
-        notifyItemInserted(items!!.size)
+        if (items!!.indexOf(DataItem.ProgressItem) == -1) {
+            items!!.add(DataItem.ProgressItem)
+            notifyItemInserted(items!!.size)
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {

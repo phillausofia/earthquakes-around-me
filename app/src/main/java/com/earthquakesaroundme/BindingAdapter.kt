@@ -1,6 +1,7 @@
 package com.earthquakesaroundme
 
 
+import android.os.Parcelable
 import android.view.View
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout

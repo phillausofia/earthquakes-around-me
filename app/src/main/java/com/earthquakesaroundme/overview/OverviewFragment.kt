@@ -3,7 +3,10 @@ package com.earthquakesaroundme.overview
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -21,10 +24,11 @@ import com.earthquakesaroundme.search_options.SearchOptions
 
 class OverviewFragment: Fragment() {
 
-    private val MY_PERMISSIONS_REQUEST_COARSE_LOCATION = 666
     private var searchOptions: SearchOptions? = null
     private lateinit var binding: FragmentOverviewBinding
     private lateinit var viewModel: OverviewViewModel
+    private var recyclerLayoutState: Parcelable? = null
+    private var adapter: EarthquakeAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?): View? {
@@ -55,23 +59,25 @@ class OverviewFragment: Fragment() {
             //Request the permission
             requestPermissions(arrayOf(
                 Manifest.permission
-                    .ACCESS_COARSE_LOCATION), MY_PERMISSIONS_REQUEST_COARSE_LOCATION)
+                    .ACCESS_COARSE_LOCATION), OverviewUtils.MY_PERMISSIONS_REQUEST_COARSE_LOCATION)
         } else {
             viewModel.getUserLocation()
         }
 
-
-        val adapter = EarthquakeAdapter(EarthquakeAdapter.OnClickListener {
-            viewModel.displayEarthquakeDetails(it)
-        })
-
-        binding.earthquakesList.adapter = adapter
-
+        if (adapter == null) {
+            adapter = EarthquakeAdapter(EarthquakeAdapter.OnClickListener {
+                viewModel.displayEarthquakeDetails(it)
+            })
+        }
+        if (binding.earthquakesList.adapter == null) {
+            binding.earthquakesList.adapter = adapter
+        }
 
 
         //Add dividers to list
         binding.earthquakesList.addItemDecoration(DividerItemDecoration(this.context,
             DividerItemDecoration.VERTICAL))
+
 
         //If we have the user's location then we can get the list of earthquakes
         viewModel.foundUserLocation.observe(this, Observer { isLocationFound ->
@@ -79,10 +85,10 @@ class OverviewFragment: Fragment() {
                 viewModel.getLatestEarthquakes()
             }
             else {
-                binding.apply {
-                    mainProgressBar.visibility = View.GONE
-                    emptyView.text = getString(R.string.location_not_found)
-                    emptyView.visibility = View.VISIBLE
+                binding.let {
+                    it.mainProgressBar.visibility = View.GONE
+                    it.emptyView.text = getString(R.string.location_not_found)
+                    it.emptyView.visibility = View.VISIBLE
                 }
             }
         })
@@ -94,9 +100,13 @@ class OverviewFragment: Fragment() {
                 binding.mainProgressBar.visibility = View.GONE
                 binding.earthquakesList.visibility = View.VISIBLE
             } else {
-                if (adapter.itemCount == 0) {
+                if (adapter!!.itemCount == 0) {
+                    val emptyViewMessage = viewModel.getLastEarthquakesException
+                        .value ?: getString(R.string.no_results)
+                    binding.emptyView.text = emptyViewMessage
                     binding.apply {
                         earthquakesList.visibility = View.GONE
+
                         emptyView.visibility = View.VISIBLE
                         mainProgressBar.visibility = View.GONE
                     }
@@ -107,7 +117,7 @@ class OverviewFragment: Fragment() {
 
         viewModel.isLoadingMoreResuls.observe(this, Observer {isLoading ->
             if (isLoading) {
-                adapter.insertProgressView()
+                adapter!!.insertProgressView()
             }
 
         })
@@ -116,9 +126,9 @@ class OverviewFragment: Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (dy > 0) {
-                    val layoutManager = binding.earthquakesList.layoutManager as LinearLayoutManager
-                    val lastVisibleItemPosition = layoutManager.findLastCompletelyVisibleItemPosition()
-                    val totalItemCount = layoutManager.itemCount
+                    val linearLayoutManager = binding.earthquakesList.layoutManager as LinearLayoutManager
+                    val lastVisibleItemPosition = linearLayoutManager.findLastCompletelyVisibleItemPosition()
+                    val totalItemCount = linearLayoutManager.itemCount
                     val scrollThreshold = 2
                         if (!(viewModel.isLoadingMoreResuls.value!!) && totalItemCount <= lastVisibleItemPosition + 1 + scrollThreshold) {
                             viewModel.getMoreResults()
@@ -131,15 +141,14 @@ class OverviewFragment: Fragment() {
 
         viewModel.earthquakeToNavigateTo.observe(this, Observer {
             if (it != null) {
-                this.findNavController().navigate(OverviewFragmentDirections.actionShowEarthquakeDetails(it))
+                this.findNavController().navigate(OverviewFragmentDirections
+                    .actionShowEarthquakeDetails(it))
                 viewModel.displayEarthquakeDetailsCompleted()
             }
         })
 
-
-
-
         setHasOptionsMenu(true)
+
 
         return binding.root
 
@@ -160,7 +169,7 @@ class OverviewFragment: Fragment() {
                                             permissions: Array<out String>,
                                             grantResults: IntArray) {
         when (requestCode) {
-            MY_PERMISSIONS_REQUEST_COARSE_LOCATION -> {
+            OverviewUtils.MY_PERMISSIONS_REQUEST_COARSE_LOCATION -> {
                 if ((grantResults.isNotEmpty() && grantResults[0] ==
                     PackageManager.PERMISSION_GRANTED)) {
                     viewModel.getUserLocation()
@@ -175,5 +184,17 @@ class OverviewFragment: Fragment() {
             }
             else -> {}
         }
+    }
+
+    override fun onPause() {
+        Log.i("onPause", "state created")
+        super.onPause()
+        recyclerLayoutState = binding.earthquakesList.layoutManager!!.onSaveInstanceState()
+    }
+
+    override fun onResume() {
+        Log.i("onResume", "state assigned")
+        super.onResume()
+        binding.earthquakesList.layoutManager!!.onRestoreInstanceState(recyclerLayoutState)
     }
 }

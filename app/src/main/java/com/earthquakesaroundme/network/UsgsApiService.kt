@@ -15,8 +15,8 @@ import java.util.concurrent.TimeUnit
 private val BASE_URL = "https://earthquake.usgs.gov/fdsnws/event/1/"
 
 private val okHttpClient = OkHttpClient.Builder()
-    .connectTimeout(45, TimeUnit.SECONDS)
-    .readTimeout(30, TimeUnit.SECONDS)
+    .connectTimeout(120, TimeUnit.SECONDS)
+    .readTimeout(119, TimeUnit.SECONDS)
     .build()
 
 private val moshi = Moshi.Builder()
