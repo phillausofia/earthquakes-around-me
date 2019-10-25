@@ -39,24 +39,6 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
     val getLastEarthquakesException: LiveData<String>
         get() = _getLastEarthquakesExceptionMessage
 
-    private val _itemScrollPosition = MutableLiveData<Int>()
-    val itemScrollPosition: LiveData<Int>
-        get() = _itemScrollPosition
-
-    val setItemScrollPosition = { value: Int -> _itemScrollPosition.value = value }
-
-    private val _scrollOffset = MutableLiveData<Int>()
-    val scrollOffset: LiveData<Int>
-        get() = _scrollOffset
-
-    val setScrollOffset = { value: Int -> _scrollOffset.value = value}
-
-    private val _recyclerViewState = MutableLiveData<Parcelable?>()
-    val recyclerViewState: LiveData<Parcelable?>
-        get() = _recyclerViewState
-
-    val setRecyclerView = {value: Parcelable? -> _recyclerViewState.value = value}
-
     private var resultsLimit = OverviewUtils.INITIAL_VALUES.RESULS_LIMIT
 
     private var minMagnitude: Int? = null

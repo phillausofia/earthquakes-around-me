@@ -51,5 +51,7 @@
     the accuracy of the data. Also, this app doesn\'t send alerts when an earthquake has
     happened. Nor does it predict them - which is impossible, by the way :).</string>
     <string name="about">About</string>
+    <string name="detail_fragment_usgs_credit">Earthquake data compiled by the U.S. Geological
+        Survey\nVisit the USGS at https://usgs.gov</string>
 
 </resources>

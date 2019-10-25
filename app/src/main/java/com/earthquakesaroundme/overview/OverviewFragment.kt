@@ -187,13 +187,11 @@ class OverviewFragment: Fragment() {
     }
 
     override fun onPause() {
-        Log.i("onPause", "state created")
         super.onPause()
         recyclerLayoutState = binding.earthquakesList.layoutManager!!.onSaveInstanceState()
     }
 
     override fun onResume() {
-        Log.i("onResume", "state assigned")
         super.onResume()
         binding.earthquakesList.layoutManager!!.onRestoreInstanceState(recyclerLayoutState)
     }

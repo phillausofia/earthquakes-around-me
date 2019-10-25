@@ -105,11 +105,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+                android:id="@+id/constraint_layout_ad"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:minHeight="200dp"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-                tools:layout_editor_absoluteX="16dp">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
 
                 <com.earthquakesaroundme.detail.CustomMapView
                     android:id="@+id/earthquake_location_map_view"
@@ -122,6 +124,20 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/text_view_usgs_credit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:autoLink="web"
+                android:fontFamily="@font/roboto"
+                android:padding="@dimen/layout_padding"
+                android:text="@string/detail_fragment_usgs_credit"
+                android:textColor="@android:color/black"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraint_layout_ad" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

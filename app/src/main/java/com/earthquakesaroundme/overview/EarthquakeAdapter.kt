@@ -131,6 +131,8 @@ class EarthquakeAdapter(val onClickListener: OnClickListener) : ListAdapter<Data
                 view.linear_layout_ad_item.addView(adView)
                 adView.adUnitId = Utils.ADAPTIVE_BANNER_AD_UNIT_ID
                 adView.adSize = Utils.adSize
+                view.linear_layout_ad_item.layoutParams
+                    .height = (adView.adSize.height * Utils.densityDpi!!).toInt()
                 val adRequest = AdRequest
                     .Builder()
                     .addTestDevice("5D768934B1FE279BA20FDDAAE2951F1F").build()
