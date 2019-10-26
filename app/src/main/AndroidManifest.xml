@@ -39,9 +39,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity
-            android:name="com.earthquakesaroundme.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
         <activity android:name="com.earthquakesaroundme.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.NumberPicker
 import android.widget.Toast
+import androidx.core.text.isDigitsOnly
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
@@ -135,7 +136,7 @@ class SearchOptionsFragment: Fragment() {
         val orderBy = if (binding.checkBoxOrderBy.isChecked)
             getOrderBySearchOption(binding) else null
         val maxRadiusKm = if (binding.checkBoxMaxRadiusKm.isChecked)
-            Integer.parseInt(binding.editTextMaxRadiusKm.text.toString()) else null
+            binding.editTextMaxRadiusKm.text.toString().toIntOrNull() else null
         val startTime = if (binding.checkBoxStartDate.isChecked)
             binding.editTextStartDate.text.toString().trim() else null
         val endTime = if (binding.checkBoxEndDate.isChecked)

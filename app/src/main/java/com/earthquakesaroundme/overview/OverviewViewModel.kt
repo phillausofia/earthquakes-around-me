@@ -1,6 +1,7 @@
 package com.earthquakesaroundme.overview
 
 import android.app.Application
+import android.location.Location
 import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -115,10 +116,14 @@ class OverviewViewModel(private val searchOptions: SearchOptions?,
             val fusedLocationProviderClient = LocationServices
                 .getFusedLocationProviderClient(application)
             fusedLocationProviderClient.lastLocation.addOnSuccessListener {
-                OverviewUtils.userLocation = it
-                latitude = OverviewUtils.userLocation!!.latitude
-                longitude = OverviewUtils.userLocation!!.longitude
-                _foundUserLocation.value = true
+                userLocation: Location? -> if (userLocation != null) {
+                    OverviewUtils.userLocation = userLocation
+                    latitude = OverviewUtils.userLocation!!.latitude
+                    longitude = OverviewUtils.userLocation!!.longitude
+                    _foundUserLocation.value = true
+                } else {
+                _foundUserLocation.value = false
+                }
             }
                 .addOnFailureListener {
                     _foundUserLocation.value = false

@@ -25,9 +25,10 @@
     <string name="number_between_zero_twenty_thousand">&lt;= 20 000</string>
     <string name="start_date">Start date</string>
     <string name="end_date">End date</string>
-    <string name="date_format">YYYY-MM-DD</string>
+    <string name="date_format">YEAR-MONTH-DAY</string>
     <string name="title_activity_maps">Map</string>
-    <string name="location_not_found">We couldn\'t find your location. Please check that the app has permission to acces your location and restart the app.</string>
+    <string name="location_not_found">We couldn\'t find your location. Please check that you have
+        enabled location and that the app has permission to access your location and restart the app.</string>
     <string name="permission_denied">Permission denied. We need your location to show the earthquakes.</string>
     <string name="radius_incorrect">Radius should be between 0 and 20 000.</string>
     <string name="date_invalid">%s date invalid. Examples of correct dates: 2000–01–01, 2018–12–31.</string>
