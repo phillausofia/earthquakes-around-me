@@ -117,7 +117,7 @@
                     android:id="@+id/earthquake_location_map_view"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:apiKey="AIzaSyBRR8nMDfu0E0r0yUpYeaU4K62sDvdvhKs"
+                    android:apiKey=""
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
